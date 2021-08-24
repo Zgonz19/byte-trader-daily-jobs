@@ -1,0 +1,9 @@
+{
+	"$type": "ByteTraderDailyJobs.SubProcessBase.DailyCandleIngestion, ByteTraderDailyJobs",
+	"ProcessDate": "0001-01-01T00:00:00",
+	"ProcessConfig": null,
+	"ProcessName": null,
+	"HasCompleted": false,
+	"Status": null,
+	"ApiKey": "ZIEBLIDOGAL9SJBAQWRGCR8BKHOG3BCD"
+}

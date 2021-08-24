@@ -5,4 +5,16 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Tables\" />
+    <Folder Include="SubProcessBase\DailyCandleIngestionProcess\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Abbotware.Interop.TDAmeritrade" Version="4.0.224" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.13.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
 </Project>
