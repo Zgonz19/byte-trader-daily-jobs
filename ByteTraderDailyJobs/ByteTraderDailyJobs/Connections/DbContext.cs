@@ -14,14 +14,14 @@ namespace ByteTraderDailyJobs.Connections
         {
             get
             {
-                return new SqlConnection("");
+                return new SqlConnection(ConfigurationManager.AppSetting["BTConnectionString"]);
             }
         }
         internal SqlConnection SqlConnect
         {
             get
             {
-                return new SqlConnection("");
+                return new SqlConnection(ConfigurationManager.AppSetting["BTConnectionString"]);
             }
         }
     }

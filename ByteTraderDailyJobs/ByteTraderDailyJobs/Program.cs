@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 
 namespace ByteTraderDailyJobs
 {
     class Program
     {
+
+
 
         public static double DateTimeToUnixTimestamp(DateTime dateTime)
         {
