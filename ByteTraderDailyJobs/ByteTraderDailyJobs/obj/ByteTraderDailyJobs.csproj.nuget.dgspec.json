@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Gonzalo\\Dropbox\\Github_08_2021\\byte-trader-daily-jobs\\ByteTraderDailyJobs\\ByteTraderDailyJobs\\ByteTraderDailyJobs.csproj": {}
+    "C:\\Users\\Gonzalo\\Dropbox\\Github_08_2021\\byte-trader-daily-jobs\\ByteTraderDevelopment\\ByteTraderDailyJobs\\ByteTraderDailyJobs\\ByteTraderDailyJobs.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Gonzalo\\Dropbox\\Github_08_2021\\byte-trader-daily-jobs\\ByteTraderDailyJobs\\ByteTraderDailyJobs\\ByteTraderDailyJobs.csproj": {
+    "C:\\Users\\Gonzalo\\Dropbox\\Github_08_2021\\byte-trader-daily-jobs\\ByteTraderDevelopment\\ByteTraderDailyJobs\\ByteTraderDailyJobs\\ByteTraderDailyJobs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gonzalo\\Dropbox\\Github_08_2021\\byte-trader-daily-jobs\\ByteTraderDailyJobs\\ByteTraderDailyJobs\\ByteTraderDailyJobs.csproj",
+        "projectUniqueName": "C:\\Users\\Gonzalo\\Dropbox\\Github_08_2021\\byte-trader-daily-jobs\\ByteTraderDevelopment\\ByteTraderDailyJobs\\ByteTraderDailyJobs\\ByteTraderDailyJobs.csproj",
         "projectName": "ByteTraderDailyJobs",
-        "projectPath": "C:\\Users\\Gonzalo\\Dropbox\\Github_08_2021\\byte-trader-daily-jobs\\ByteTraderDailyJobs\\ByteTraderDailyJobs\\ByteTraderDailyJobs.csproj",
+        "projectPath": "C:\\Users\\Gonzalo\\Dropbox\\Github_08_2021\\byte-trader-daily-jobs\\ByteTraderDevelopment\\ByteTraderDailyJobs\\ByteTraderDailyJobs\\ByteTraderDailyJobs.csproj",
         "packagesPath": "C:\\Users\\Gonzalo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gonzalo\\Dropbox\\Github_08_2021\\byte-trader-daily-jobs\\ByteTraderDailyJobs\\ByteTraderDailyJobs\\obj\\",
+        "outputPath": "C:\\Users\\Gonzalo\\Dropbox\\Github_08_2021\\byte-trader-daily-jobs\\ByteTraderDevelopment\\ByteTraderDailyJobs\\ByteTraderDailyJobs\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -49,6 +49,14 @@
             "Abbotware.Interop.TDAmeritrade": {
               "target": "Package",
               "version": "[4.0.224, )"
+            },
+            "Alpaca.Markets": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.90, )"
             },
             "NLog.Web.AspNetCore": {
               "target": "Package",

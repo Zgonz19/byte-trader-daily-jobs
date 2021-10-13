@@ -6,12 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Tables\" />
-    <Folder Include="SubProcessBase\DailyCandleIngestionProcess\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Abbotware.Interop.TDAmeritrade" Version="4.0.224" />
+    <PackageReference Include="Alpaca.Markets" Version="5.0.6" />
+    <PackageReference Include="Dapper" Version="2.0.90" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.13.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />

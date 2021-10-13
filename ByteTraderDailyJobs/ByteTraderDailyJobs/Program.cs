@@ -4,8 +4,20 @@ namespace ByteTraderDailyJobs
 {
     class Program
     {
+
+        public static double DateTimeToUnixTimestamp(DateTime dateTime)
+        {
+            return (TimeZoneInfo.ConvertTimeToUtc(dateTime) -
+                   new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc)).TotalMilliseconds;
+        }
+
         static void Main(string[] args)
         {
+            //public DateTime(int year, int month, int day, int hour, int minute, int second);
+            //var date = new DateTime(2021, 08, 01, 18, 0, 0);
+            //var unixTimeStampInMilliseconds = DateTimeToUnixTimestamp(date);
+
+            //test branch
             var dailyTaskApp = new InitializeApp();
             //InitializeApp.MadeupFunction();
             dailyTaskApp.ExecuteProcessList();
