@@ -6,7 +6,7 @@ namespace ByteTraderDailyJobs.SubProcessBase
 {
     public class ProcessBaseConfig : IProcessBaseConfig
     {
-
+        public bool AllowExecution { get; set; }
 
         public virtual void ExecuteProcess()
         {

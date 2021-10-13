@@ -307,6 +307,40 @@ namespace ByteTraderDailyJobs.Connections
             return table;
         }
 
+
+
+
+        public async Task<List<HistoricalDailyCandles>> QueryCandlesByDate(int SymbolId, DateTime BeginDate, DateTime EndDate)
+        {
+            List<HistoricalDailyCandles> stockSymbols;
+            var parameters = new DynamicParameters();
+            parameters.Add("@SymbolId", SymbolId);
+            parameters.Add("@BeginDate", BeginDate);
+            parameters.Add("@EndDate", EndDate);
+            var sqlQuery = "SELECT * FROM DailyHistoricalPriceData WHERE SymbolId = @SymbolId AND MarketDate >= @BeginDate AND MarketDate <= @EndDate;";
+            using (IDbConnection cn = Connection)
+            {
+                cn.Open();
+                var result = cn.QueryAsync<HistoricalDailyCandles>(sqlQuery, parameters).Result;
+                cn.Close();
+                stockSymbols = result.ToList();
+            }
+            return stockSymbols;
+        }
+
+        public async Task<List<int>> SymbolsInPercentChangeTable()
+        {
+            List<int> stockSymbols;
+            var sqlQuery = "SELECT DISTINCT SymbolId FROM PercentChangeData;";
+            using (IDbConnection cn = Connection)
+            {
+                cn.Open();
+                var result = cn.QueryAsync<int>(sqlQuery).Result;
+                cn.Close();
+                stockSymbols = result.ToList();
+            }
+            return stockSymbols;
+        }
         public async Task<List<HistoricalDailyCandles>> LoadPercentChangeList(int SymbolId)
         {
             List<HistoricalDailyCandles> stockSymbols;

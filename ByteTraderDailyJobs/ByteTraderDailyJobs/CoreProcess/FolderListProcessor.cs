@@ -45,7 +45,17 @@ namespace ByteTraderDailyJobs.CoreProcess
 
         public async void ExecuteFolderTask(FolderBase task)
         {
-            task.ProcessConfig.ExecuteProcess();
+            if (task.ProcessConfig.AllowExecution)
+            {
+                task.ProcessConfig.ExecuteProcess();
+            }
+            else
+            {
+
+            }
+
+
+
 
             //CreateJsonConfig(task);
             //task.SetJsonText();

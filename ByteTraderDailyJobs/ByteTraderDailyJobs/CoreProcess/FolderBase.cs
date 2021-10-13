@@ -50,5 +50,14 @@ namespace ByteTraderDailyJobs.CoreProcess
 
 
         }
+        public void InitializeRunParameters()
+        {
+            //if run parameters foloder exists & RunParemeters Json exists,
+
+        }
+
+
     }
+
+
 }

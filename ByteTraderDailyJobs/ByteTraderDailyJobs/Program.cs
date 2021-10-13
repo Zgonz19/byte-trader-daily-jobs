@@ -16,6 +16,7 @@ namespace ByteTraderDailyJobs
 
         static void Main(string[] args)
         {
+            Console.WriteLine("Initializing Byte Trader Daily Ingestion Routine...");
             //public DateTime(int year, int month, int day, int hour, int minute, int second);
             //var date = new DateTime(2021, 08, 01, 18, 0, 0);
             //var unixTimeStampInMilliseconds = DateTimeToUnixTimestamp(date);

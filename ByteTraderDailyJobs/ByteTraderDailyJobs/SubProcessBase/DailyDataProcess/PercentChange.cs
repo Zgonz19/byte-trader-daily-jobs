@@ -9,15 +9,15 @@ namespace ByteTraderDailyJobs.SubProcessBase.DailyDataProcess
     public class PercentChange
     {
         public List<HistoricalDailyCandles> InputList { get; set; }
-        public DateTime ProcessDate { get; set; }
+        //public DateTime ProcessDate { get; set; }
         public List<List<HistoricalDailyCandles>> FilteredInputList { get; set; }
 
         public List<PercentChangeData> CalculatedData = new List<PercentChangeData>();
 
-        public PercentChange(List<HistoricalDailyCandles> dailyList, DateTime processDate)
+        public PercentChange(List<HistoricalDailyCandles> dailyList)
         {
             InputList = dailyList.OrderBy(e => e.DateTime).ToList();
-            ProcessDate = processDate;
+            //ProcessDate = processDate;
         }
 
         public void FilterList()

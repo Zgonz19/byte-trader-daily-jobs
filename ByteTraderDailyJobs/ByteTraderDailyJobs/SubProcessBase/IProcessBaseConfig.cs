@@ -6,6 +6,7 @@ namespace ByteTraderDailyJobs.SubProcessBase
 {
     public interface IProcessBaseConfig
     {
+        public bool AllowExecution { get; set; }
         public void ExecuteProcess();
         public void SetDailyTaskParameters();
 
