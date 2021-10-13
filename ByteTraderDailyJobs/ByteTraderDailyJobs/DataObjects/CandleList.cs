@@ -12,12 +12,12 @@ namespace ByteTraderDailyJobs.DataObjects
     }
     public class candles
     {
-        public Decimal close { get; set; }
-        public long datetime { get; set; }
-        public Decimal high { get; set; }
-        public Decimal low { get; set; }
-        public Decimal open { get; set; }
-        public int volume { get; set; }
+        public string close { get; set; }
+        public long? datetime { get; set; }
+        public string high { get; set; }
+        public string low { get; set; }
+        public string open { get; set; }
+        public string volume { get; set; }
     }
 
 

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ByteTraderDailyJobs.Connections
 {
@@ -12,7 +14,7 @@ namespace ByteTraderDailyJobs.Connections
         {
             get
             {
-                return new SqlConnection("ConnectionString");
+                return new SqlConnection("");
             }
         }
         internal SqlConnection SqlConnect

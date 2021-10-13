@@ -43,7 +43,7 @@ namespace ByteTraderDailyJobs.CoreProcess
             //File.WriteAllText(task.FolderDirectory.FullName + "\\DailyCandleIngestionConfig.json", output);
         }
 
-        public void ExecuteFolderTask(FolderBase task)
+        public async void ExecuteFolderTask(FolderBase task)
         {
             task.ProcessConfig.ExecuteProcess();
 
