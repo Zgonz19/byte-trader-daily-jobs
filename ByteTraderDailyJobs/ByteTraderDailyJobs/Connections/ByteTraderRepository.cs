@@ -316,11 +316,10 @@ namespace ByteTraderDailyJobs.Connections
             var parameters = new DynamicParameters();
             try
             {
-
+                //BeginDate.ToString("yyyy-MM-dd")
                 parameters.Add("@SymbolId", SymbolId);
-                parameters.Add("@BeginDate", BeginDate);
-                parameters.Add("@EndDate", EndDate);
-                var sqlQuery = "SELECT * FROM HistoricalDailyCandles WHERE SymbolId = @SymbolId AND MarketDate >= @BeginDate AND MarketDate <= @EndDate;";
+
+                var sqlQuery = $"SELECT * FROM HistoricalDailyCandles WHERE SymbolId = @SymbolId AND DateTime >= '{BeginDate.ToString("yyyy-MM-dd")}' AND DateTime <= '{EndDate.ToString("yyyy-MM-dd")}';";
                 using (IDbConnection cn = Connection)
                 {
                     cn.Open();
