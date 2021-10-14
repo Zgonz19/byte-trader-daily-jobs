@@ -17,7 +17,8 @@ namespace ByteTraderDailyJobs.SubProcessBase
         }
         public override async void ExecuteProcess()
         {
-            await ProcessDailyChange();
+            //await ProcessDailyChange();
+            await InitializePercentChange();
         }
 
         public async Task InitializePercentChange()

@@ -58,13 +58,14 @@ namespace ByteTraderDailyJobs.SubProcessBase
                 }
                 catch (Exception exc)
                 {
-
+                    
                 }
             }
 
             List<candles> FilterOutput(List<candles> bars, NightlyBarsModel barsModel)
             {
-                var maxDateUnix = (long?)DateTimeToUnixTimestamp(barsModel.MaxDate);
+                //var maxDateUnix = (long?)DateTimeToUnixTimestamp(barsModel.MaxDate);
+                var maxDateUnix = long.Parse(barsModel.MarketDate);
                 var datesList = bars.Select(e => e.datetime).ToList();
                 if (datesList.Contains(maxDateUnix))
                 {

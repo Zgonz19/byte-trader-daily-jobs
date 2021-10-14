@@ -30,7 +30,6 @@ namespace ByteTraderDailyJobs.CoreProcess
             }
             return folderList;
         }
-
         public void CreateJsonConfig(FolderBase task)
         {
             var testObject = new DailyCandleIngestion();
@@ -42,6 +41,7 @@ namespace ByteTraderDailyJobs.CoreProcess
             //File.WriteAllText("", output);
             //File.WriteAllText(task.FolderDirectory.FullName + "\\DailyCandleIngestionConfig.json", output);
         }
+
 
         public async void ExecuteFolderTask(FolderBase task)
         {

@@ -44,7 +44,7 @@ namespace ByteTraderDailyJobs.Connections
         public async Task<List<NightlyBarsModel>> QueryNightlyBars()
         {
             List<NightlyBarsModel> nighlyBars;
-            var sqlQuery = @"SELECT DISTINCT (DHPD.SymbolId), MAX(DHPD.[DateTime]) AS MaxDate, RSI.Symbol  
+            var sqlQuery = @"SELECT DISTINCT (DHPD.SymbolId), MAX(DHPD.[DateTime]) AS MaxDate, RSI.Symbol,  Max(DHPD.MarketDate) As MarketDate
                                 FROM [HistoricalDailyCandles] DHPD, [SymbolIndex] RSI 
                                 WHERE (DHPD.SymbolId = RSI.SymbolId) 
                                 GROUP BY RSI.Symbol, DHPD.SymbolId;";
@@ -314,16 +314,25 @@ namespace ByteTraderDailyJobs.Connections
         {
             List<HistoricalDailyCandles> stockSymbols;
             var parameters = new DynamicParameters();
-            parameters.Add("@SymbolId", SymbolId);
-            parameters.Add("@BeginDate", BeginDate);
-            parameters.Add("@EndDate", EndDate);
-            var sqlQuery = "SELECT * FROM DailyHistoricalPriceData WHERE SymbolId = @SymbolId AND MarketDate >= @BeginDate AND MarketDate <= @EndDate;";
-            using (IDbConnection cn = Connection)
+            try
             {
-                cn.Open();
-                var result = cn.QueryAsync<HistoricalDailyCandles>(sqlQuery, parameters).Result;
-                cn.Close();
-                stockSymbols = result.ToList();
+
+                parameters.Add("@SymbolId", SymbolId);
+                parameters.Add("@BeginDate", BeginDate);
+                parameters.Add("@EndDate", EndDate);
+                var sqlQuery = "SELECT * FROM HistoricalDailyCandles WHERE SymbolId = @SymbolId AND MarketDate >= @BeginDate AND MarketDate <= @EndDate;";
+                using (IDbConnection cn = Connection)
+                {
+                    cn.Open();
+                    var result = cn.QueryAsync<HistoricalDailyCandles>(sqlQuery, parameters).Result;
+                    cn.Close();
+                    stockSymbols = result.ToList();
+                }
+
+            }
+            catch (Exception exc)
+            {
+                stockSymbols = null;
             }
             return stockSymbols;
         }
@@ -446,5 +455,6 @@ namespace ByteTraderDailyJobs.Connections
         public int SymbolId { get; set; }
         public DateTime MaxDate { get; set; }
         public string Symbol { get; set; }
+        public string MarketDate { get; set; }
     }
 }
