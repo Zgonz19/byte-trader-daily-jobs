@@ -253,19 +253,14 @@ namespace ByteTraderDailyJobs.SubProcessBase
 
         public async Task AlpacaDataIngestion()
         {
-
             var tableRows = await Repo.QueryAllSymbols();
             var client2 = Alpaca.Markets.Environments.Live.GetAlpacaTradingClient(new SecretKey(AlpacaApiKey, AlpacaSecretKey));
             var asset = new AssetsRequest { AssetStatus = AssetStatus.Active };
             var assetList = client2.ListAssetsAsync(asset).Result.ToList();
-
             var symbolList = tableRows.Select(e => e.Symbol).ToList();
-
             var startDate = new DateTime(2016, 1, 1);
             var endDate = DateTime.Now.AddHours(-1);
-            //var tickers = await Repo.QueryNightlyBars();
             var client5 = Alpaca.Markets.Environments.Live.GetAlpacaDataClient(new SecretKey(AlpacaApiKey, AlpacaSecretKey));
-
             var assetsToLoad = new List<IAsset>();
             var dailyCandlesToLoad = new List<IAsset>();
             foreach (var stock in assetList)
@@ -404,7 +399,6 @@ namespace ByteTraderDailyJobs.SubProcessBase
             IPage<IBar> bars;
             try
             {
-                //var client5 = Alpaca.Markets.Environments.Live.GetAlpacaDataClient(new SecretKey(AlpacaApiKey, AlpacaSecretKey));
                 bars = client5.ListHistoricalBarsAsync(new HistoricalBarsRequest(stock.Symbol, startDate, endDate, BarTimeFrame.Day)).Result;
                 var test1 = bars.Items;
                 var test2 = test1.Count;
@@ -436,7 +430,6 @@ namespace ByteTraderDailyJobs.SubProcessBase
                 var candleList = new List<candles>();
                 foreach (var item in barList)
                 {
-                    //var x = new Alpaca.Markets.JsonHistoricalBar();
                     var candle = new candles
                     {
                         close = item.Close.ToString(),
