@@ -17,18 +17,14 @@ namespace ByteTraderDailyJobs.SubProcessBase
         }
         public override async void ExecuteProcess()
         {
-            //await ProcessDailyChange();
             await InitializePercentChange();
+            await ProcessDailyChange();
         }
 
         public async Task InitializePercentChange()
         {
             var stockList = await BR.QueryAvailableSymbols();
             var symbolsInPC = await BR.SymbolsInPercentChangeTable();
-
-            //var processList = new Dictionary<int, Tables.SymbolIndex>();
-
-
             foreach (var stock in stockList)
             {
                 if (!symbolsInPC.Contains(stock.SymbolId))
@@ -41,9 +37,6 @@ namespace ByteTraderDailyJobs.SubProcessBase
                     await BR.BulkPercentChangeInsert(percentChange.CalculatedData);
                 }
             }
-
-
-
         }
 
         public async Task ProcessDailyChange()
@@ -58,6 +51,8 @@ namespace ByteTraderDailyJobs.SubProcessBase
                     var percentChange = new PercentChange(ListToProcess);
                     percentChange.CalculateChange();
                     //var result = percentChange.CalculatedData;
+
+
                     await BR.BulkPercentChangeInsert(percentChange.CalculatedData);
                 }
             }

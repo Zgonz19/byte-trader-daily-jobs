@@ -63,7 +63,6 @@ C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelop
 C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
 C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
-C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\obj\Debug\netcoreapp3.1\ByteTraderDailyJobs.csproj.AssemblyReference.cache
 C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\obj\Debug\netcoreapp3.1\ByteTraderDailyJobs.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\obj\Debug\netcoreapp3.1\ByteTraderDailyJobs.AssemblyInfoInputs.cache
 C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\obj\Debug\netcoreapp3.1\ByteTraderDailyJobs.AssemblyInfo.cs
@@ -72,3 +71,4 @@ C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelop
 C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\obj\Debug\netcoreapp3.1\ByteTraderDailyJobs.dll
 C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\obj\Debug\netcoreapp3.1\ByteTraderDailyJobs.pdb
 C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\obj\Debug\netcoreapp3.1\ByteTraderDailyJobs.genruntimeconfig.cache
+C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\obj\Debug\netcoreapp3.1\ByteTraderDailyJobs.csproj.AssemblyReference.cache

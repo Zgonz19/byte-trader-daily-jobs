@@ -61,6 +61,71 @@ namespace ByteTraderDailyJobs.Connections
         {
             await BulkCandleInsert(candles, symbolId, symbol);
         }
+
+        public async Task SetCaptureDate(string symbol)
+        {
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@Symbol", symbol);
+                parameters.Add("@CaptureDate", DateTime.Now);
+
+                var sqlCommand = $"UPDATE dbo.SymbolIndex SET CaptureDate = @CaptureDate " +
+                    $"WHERE Symbol = @Symbol;";
+                using (IDbConnection cn = Connection)
+                {
+                    try
+                    {
+                        cn.Open();
+                        cn.Execute(sqlCommand, parameters);
+                        cn.Close();
+                    }
+                    catch (Exception exc)
+                    {
+                        Console.WriteLine(exc.ToString());
+                    }
+
+                }
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine(exc.ToString());
+            }
+        }
+    
+
+        public async Task DiscontinueAsset(string symbol, string flag)
+        {
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@Symbol", symbol);
+                parameters.Add("@IsAssetDiscontinued", flag);
+                parameters.Add("@DiscontinuedDate", DateTime.Now);
+
+                var sqlCommand = $"UPDATE dbo.SymbolIndex SET IsAssetDiscontinued = @IsAssetAvailable, DiscontinuedDate = @DiscontinuedDate" +
+                    $"WHERE Symbol = @Symbol;";
+                using (IDbConnection cn = Connection)
+                {
+                    try
+                    {
+                        cn.Open();
+                        cn.Execute(sqlCommand, parameters);
+                        cn.Close();
+                    }
+                    catch (Exception exc)
+                    {
+                        Console.WriteLine(exc.ToString());
+                    }
+
+                }
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine(exc.ToString());
+            }
+        }
+
         public async Task SetAssetFlag(string symbol, string flag)
         {
             try
@@ -148,6 +213,27 @@ namespace ByteTraderDailyJobs.Connections
         }
 
 
+        public async Task<List<SymbolIndex>> QueryAllSymbols()
+        {
+            List<SymbolIndex> stockSymbols;
+            var sqlQuery = "select * from dbo.SymbolIndex;";
+            using (IDbConnection cn = Connection)
+            {
+                try
+                {
+                    cn.Open();
+                    var result = cn.QueryAsync<SymbolIndex>(sqlQuery).Result;
+                    cn.Close();
+                    stockSymbols = result.ToList();
+                }
+                catch (Exception exc)
+                {
+                    stockSymbols = null;
+                }
+
+            }
+            return stockSymbols;
+        }
 
 
         public async Task<List<SymbolIndex>> QuerySymbols()
@@ -275,7 +361,7 @@ namespace ByteTraderDailyJobs.Connections
             table.Columns.Add("SymbolId", typeof(int));
             table.Columns.Add("DateString", typeof(string));
             table.Columns.Add("Symbol", typeof(string));
-            table.Columns.Add("MarketDate", typeof(string));
+            table.Columns.Add("MarketDate", typeof(DateTime));
             table.Columns.Add("Open", typeof(string));
             table.Columns.Add("High", typeof(string));
             table.Columns.Add("Low", typeof(string));
@@ -283,9 +369,11 @@ namespace ByteTraderDailyJobs.Connections
             table.Columns.Add("Volume", typeof(string));
             table.Columns.Add("DateTime", typeof(DateTime));
             //table.Columns.Add("AdjustedClose", typeof(decimal));
+            var dates = data.Select(e => e.datetime).ToList();
+            var datestrings = new List<string>();
             foreach (var candle in data)
             {
-                var dateStamp = GenerateDateString(ConvertUnixTimeStamp(candle.datetime));
+                var dateStamp = GenerateDateString(candle.datetime);
 
 
                 var row = new Object[]
@@ -299,10 +387,31 @@ namespace ByteTraderDailyJobs.Connections
                     NaNToNull(candle.low),
                     NaNToNull(candle.close),
                     NaNToNull(candle.volume),
-                    ConvertUnixTimeStamp(candle.datetime),
+                    candle.datetime,
                     //adjustedClose
                 };
-                table.Rows.Add(row);
+                if (datestrings.Contains(dateStamp))
+                {
+                    var x = table.Rows;
+                    var ttt = x[datestrings.Count - 1];
+                    Console.WriteLine("RIP");
+                    var x2 = ttt[9];
+                    var x4 = row[9];
+
+
+                    if((DateTime)x4 > (DateTime)x2)
+                    {
+                        table.Rows.Remove(ttt);
+                        table.Rows.Add(row);
+                    }
+                }
+
+                else
+                {
+                    datestrings.Add(dateStamp);
+                    table.Rows.Add(row);
+                }
+
             }
             return table;
         }
@@ -316,7 +425,6 @@ namespace ByteTraderDailyJobs.Connections
             var parameters = new DynamicParameters();
             try
             {
-                //BeginDate.ToString("yyyy-MM-dd")
                 parameters.Add("@SymbolId", SymbolId);
 
                 var sqlQuery = $"SELECT * FROM HistoricalDailyCandles WHERE SymbolId = @SymbolId AND DateTime >= '{BeginDate.ToString("yyyy-MM-dd")}' AND DateTime <= '{EndDate.ToString("yyyy-MM-dd")}';";
@@ -327,7 +435,6 @@ namespace ByteTraderDailyJobs.Connections
                     cn.Close();
                     stockSymbols = result.ToList();
                 }
-
             }
             catch (Exception exc)
             {
@@ -398,15 +505,18 @@ namespace ByteTraderDailyJobs.Connections
         {
             var table = new DataTable();
             table.Columns.Add("SymbolId", typeof(int));
+            table.Columns.Add("MarketDateString", typeof(string));
             table.Columns.Add("MarketDate", typeof(DateTime));
-            table.Columns.Add("PastDate", typeof(DateTime));
+            table.Columns.Add("PreviousMarketDate", typeof(DateTime));
             table.Columns.Add("PercentChange", typeof(decimal));
             table.Columns.Add("AbsoluteChange", typeof(decimal));
             foreach (var item in data)
             {
+                var dateStamp = GenerateDateString((item.MarketDate));
                 var row = new Object[]
                 {
                     item.SymbolId,
+                    dateStamp,
                     item.MarketDate,
                     item.PreviousMarketDate,
                     item.PercentChange,
@@ -428,11 +538,12 @@ namespace ByteTraderDailyJobs.Connections
                     {
                         sqlbc.DestinationTableName = "PercentChangeData";
                         sqlbc.ColumnMappings.Add("SymbolId", "SymbolId");
+                        sqlbc.ColumnMappings.Add("MarketDateString", "MarketDateString");
                         sqlbc.ColumnMappings.Add("MarketDate", "MarketDate");
-                        sqlbc.ColumnMappings.Add("PastDate", "PastDate");
+                        sqlbc.ColumnMappings.Add("PreviousMarketDate", "PreviousMarketDate");
                         sqlbc.ColumnMappings.Add("PercentChange", "PercentChange");
                         sqlbc.ColumnMappings.Add("AbsoluteChange", "AbsoluteChange");
-                        await sqlbc.WriteToServerAsync(dataTable);
+                        sqlbc.WriteToServer(dataTable);
                     }
                     sqlConn.Close();
                 }

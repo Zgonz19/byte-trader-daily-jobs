@@ -13,7 +13,7 @@ namespace ByteTraderDailyJobs.DataObjects
     public class candles
     {
         public string close { get; set; }
-        public long? datetime { get; set; }
+        public DateTime datetime { get; set; }
         public string high { get; set; }
         public string low { get; set; }
         public string open { get; set; }

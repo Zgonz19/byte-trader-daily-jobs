@@ -32,13 +32,17 @@ namespace ByteTraderDailyJobs.SubProcessBase
         }
         public override async void ExecuteProcess()
         {
-            await PriceHistoryDataUpdate();
+            await AlpacaDataIngestion();
+            //await PriceHistoryDataUpdate();
         }
         public async Task PriceHistoryDataUpdate()
         {
             var runDate = DateTime.Now;
             var repo = new ByteTraderRepository();
             var tickers = await repo.QueryNightlyBars();
+
+            //tickers = tickers.Where(e => e.SymbolId == 999).ToList();
+
             foreach (var symbol in tickers)
             {
                 Thread.Sleep(TimeSpan.FromSeconds(0.5));
@@ -47,12 +51,28 @@ namespace ByteTraderDailyJobs.SubProcessBase
                 var apiCall = new BaseApiCall(apiUrl);
                 try
                 {
-                    await apiCall.CallApi();
-                    apiCall.SetResponseObject<CandleList>();
+                    var retry = 0;
+                    do
+                    {
+                        await apiCall.CallApi();
+                        apiCall.SetResponseObject<CandleList>();
+
+                        if(apiCall.ResponseObject.candles.Count == 0)
+                        {
+                            retry++;
+                            Thread.Sleep(TimeSpan.FromSeconds(20));
+
+                        }
+                        else
+                        {
+                            retry = 4;
+                        }                    
+                    } while (retry < 3);
+
                     if (!(apiCall.ResponseObject.candles.Count == 0))
                     {
                         var bars = (List<candles>)apiCall.ResponseObject.candles;
-                        var filteredBars = FilterOutput(bars, symbol);
+                        var filteredBars = FilterOutput(bars, symbol, runDate);
                         repo.InsertHistoricalCandles(filteredBars, symbol.Symbol, symbol.SymbolId);
                     }
                 }
@@ -62,10 +82,12 @@ namespace ByteTraderDailyJobs.SubProcessBase
                 }
             }
 
-            List<candles> FilterOutput(List<candles> bars, NightlyBarsModel barsModel)
+            List<candles> FilterOutput(List<candles> bars, NightlyBarsModel barsModel, DateTime runDate)
             {
                 //var maxDateUnix = (long?)DateTimeToUnixTimestamp(barsModel.MaxDate);
-                var maxDateUnix = long.Parse(barsModel.MarketDate);
+                var maxDateUnix = runDate;
+                var test1 = runDate;
+                var runDateUnix = test1;
                 var datesList = bars.Select(e => e.datetime).ToList();
                 if (datesList.Contains(maxDateUnix))
                 {
@@ -78,6 +100,11 @@ namespace ByteTraderDailyJobs.SubProcessBase
                     //if (maxdate == barsModel.MaxDate || mindate == barsModel.MaxDate)
                     //{
                     //}
+                }
+                if (datesList.Contains(runDateUnix))
+                {
+                    var candle = bars.FirstOrDefault(e => e.datetime == runDateUnix);
+                    bars.Remove(candle);
                 }
                 return bars;
             }
@@ -139,7 +166,7 @@ namespace ByteTraderDailyJobs.SubProcessBase
                     var candle = new candles();
 
                     candle.close = quote.closePrice;
-                    candle.datetime = quote.quoteTimeInLong;
+                    //candle.datetime = quote.quoteTimeInLong;
                     candle.high = quote.highPrice;
                     candle.low = quote.lowPrice;
                     candle.open = quote.openPrice;
@@ -224,10 +251,50 @@ namespace ByteTraderDailyJobs.SubProcessBase
         //    await QuotesAsync();
         //}
 
+        public async Task AlpacaDataIngestion()
+        {
+
+            var tableRows = await Repo.QueryAllSymbols();
+            var client2 = Alpaca.Markets.Environments.Live.GetAlpacaTradingClient(new SecretKey(AlpacaApiKey, AlpacaSecretKey));
+            var asset = new AssetsRequest { AssetStatus = AssetStatus.Active };
+            var assetList = client2.ListAssetsAsync(asset).Result.ToList();
+
+            var symbolList = tableRows.Select(e => e.Symbol).ToList();
+
+            var startDate = new DateTime(2016, 1, 1);
+            var endDate = DateTime.Now.AddHours(-1);
+            //var tickers = await Repo.QueryNightlyBars();
+            var client5 = Alpaca.Markets.Environments.Live.GetAlpacaDataClient(new SecretKey(AlpacaApiKey, AlpacaSecretKey));
+
+            var assetsToLoad = new List<IAsset>();
+            var dailyCandlesToLoad = new List<IAsset>();
+            foreach (var stock in assetList)
+            {
+                if (symbolList.Contains(stock.Symbol))
+                {
+                    dailyCandlesToLoad.Add(stock);
+                }
+                else
+                {
+                    assetsToLoad.Add(stock);
+                }
+            }
+            foreach (var item in assetsToLoad)
+            {
+                SymbolOnboarding(item, client5);
+                Thread.Sleep(TimeSpan.FromSeconds(0.6));
+            }
+            foreach (var item in dailyCandlesToLoad)
+            {
+                ProcessDailyCandlesAlpaca(item, client5);
+                Thread.Sleep(TimeSpan.FromSeconds(0.6));
+            }
+        }
 
         public async void ProcessTestingMethod()
         {
-
+            var client = Alpaca.Markets.Environments.Paper
+    .GetAlpacaDataClient(new SecretKey(AlpacaApiKey, AlpacaSecretKey));
             await CaptureDailyCandles();
             //CaptureHistoricalDailyCandles();
             var repo = new ByteTraderRepository();
@@ -246,7 +313,7 @@ namespace ByteTraderDailyJobs.SubProcessBase
             }
 
             // First, open the API connection
-            var client = Alpaca.Markets.Environments.Paper
+            var client5 = Alpaca.Markets.Environments.Paper
                 .GetAlpacaDataClient(new SecretKey(AlpacaApiKey, AlpacaSecretKey));
 
             var into = DateTime.Today;
@@ -277,5 +344,114 @@ namespace ByteTraderDailyJobs.SubProcessBase
   
         }
 
+        public async void ProcessDailyCandlesAlpaca(IAsset stock, IAlpacaDataClient client5)
+        {
+            var endDate = DateTime.Now.AddHours(-1);
+            var tickers = await Repo.QueryNightlyBars();
+            var test = tickers.FirstOrDefault(e => e.Symbol == stock.Symbol);
+            //var bars = client5.ListHistoricalBarsAsync(new HistoricalBarsRequest(stock.Symbol, test.MaxDate, endDate, BarTimeFrame.Day)).Result;
+            IPage<IBar> bars;
+            try
+            {
+                bars = client5.ListHistoricalBarsAsync(new HistoricalBarsRequest(stock.Symbol, test.MaxDate, endDate, BarTimeFrame.Day)).Result;
+                var test1 = bars.Items;
+                var test2 = test1.Count;
+            }
+            catch (Exception exc)
+            {
+                bars = null;
+            }
+            List<IBar> barList;
+            if (bars == null)
+            {
+                barList = new List<IBar>();
+            }
+            else
+            {
+                barList = bars.Items.ToList();
+            }
+
+            if (barList.Count == 0)
+            {
+                //discontinue asset of api no longer returns data                       
+            }
+            else
+            {
+                var candleList = new List<candles>();
+
+                foreach (var item in barList)
+                {
+                    var candle = new candles
+                    {
+                        close = item.Close.ToString(),
+                        datetime = item.TimeUtc,
+                        high = item.High.ToString(),
+                        low = item.Low.ToString(),
+                        open = item.Open.ToString(),
+                        volume = item.Volume.ToString()
+                    };
+                    candleList.Add(candle);
+                }
+                Repo.InsertHistoricalCandles(candleList, stock.Symbol, test.SymbolId);
+            }
+        }
+        public async void SymbolOnboarding(IAsset stock, IAlpacaDataClient client5)
+        {
+            var startDate = new DateTime(2016, 1, 1);
+            var endDate = DateTime.Now.AddHours(-1);
+            //onboard new Symbol
+            await Repo.InsertStock(stock.Symbol, stock.Name);
+            IPage<IBar> bars;
+            try
+            {
+                //var client5 = Alpaca.Markets.Environments.Live.GetAlpacaDataClient(new SecretKey(AlpacaApiKey, AlpacaSecretKey));
+                bars = client5.ListHistoricalBarsAsync(new HistoricalBarsRequest(stock.Symbol, startDate, endDate, BarTimeFrame.Day)).Result;
+                var test1 = bars.Items;
+                var test2 = test1.Count;
+            }
+            catch (Exception exc)
+            {
+                bars = null;
+            }
+            List<IBar> barList;
+            if(bars == null)
+            {
+                barList = new List<IBar>();
+            }
+            else
+            {
+                barList = bars.Items.ToList();
+            }
+
+
+
+            if (barList.Count == 0)
+            {
+                await Repo.SetAssetFlag(stock.Symbol, "N");
+            }
+            else
+            {
+                var symbolId = await Repo.QuerySymbolId(stock.Symbol);
+
+                var candleList = new List<candles>();
+                foreach (var item in barList)
+                {
+                    //var x = new Alpaca.Markets.JsonHistoricalBar();
+                    var candle = new candles
+                    {
+                        close = item.Close.ToString(),
+                        datetime = item.TimeUtc,
+                        high = item.High.ToString(),
+                        low = item.Low.ToString(),
+                        open = item.Open.ToString(),
+                        volume = item.Volume.ToString()
+                    };
+                    candleList.Add(candle);
+                }
+                Repo.InsertHistoricalCandles(candleList, stock.Symbol, symbolId);
+                await Repo.SetAssetFlag(stock.Symbol, "Y");
+                await Repo.SetCaptureDate(stock.Symbol);
+            }
+        }
     }
 }
