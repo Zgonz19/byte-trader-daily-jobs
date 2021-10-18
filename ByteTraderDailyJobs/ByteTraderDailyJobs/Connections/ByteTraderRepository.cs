@@ -41,6 +41,47 @@ namespace ByteTraderDailyJobs.Connections
 
         //    return index;
         //}
+        public async Task<List<AppUsers>> GetAppUsers()
+        {
+            List<AppUsers> appUsers;
+            var sqlQuery = "SELECT * FROM AppUsers";
+            using (IDbConnection cn = Connection)
+            {
+                cn.Open();
+                var result = await cn.QueryAsync<AppUsers>(sqlQuery);
+                cn.Close();
+                appUsers = result.ToList();
+            }
+            return appUsers;
+        }
+        public async Task<SystemDefaults> GetSystemDefault(string attributeName)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@AttributeName", attributeName);
+            SystemDefaults index;
+            var sqlQuery = @"SELECT * FROM SystemDefaults WHERE AttributeName = @AttributeName;";
+            try
+            {
+                using (IDbConnection cn = Connection)
+                {
+                    cn.Open();
+                    var result = cn.QueryAsync<SystemDefaults>(sqlQuery, parameters).GetAwaiter().GetResult();
+                    cn.Close();
+                    index = result.FirstOrDefault();
+                }
+            }
+            catch (Exception exc)
+            {
+                index = null;
+                //Logger.Info(exc.ToString());
+            }
+
+            return index;
+        }
+
+
+
+
         public async Task<List<NightlyBarsModel>> QueryNightlyBars()
         {
             List<NightlyBarsModel> nighlyBars;
@@ -92,7 +133,76 @@ namespace ByteTraderDailyJobs.Connections
                 Console.WriteLine(exc.ToString());
             }
         }
-    
+
+
+
+
+
+
+
+
+
+
+
+
+        public async Task<List<ChangeDataReport>> LoadTopDailyLosers(DateTime marketDate)
+        {
+            List<ChangeDataReport> stockSymbols;
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@MarketDate", marketDate);
+                var sqlQuery = @"SELECT TOP(250) RSI.Id, RSI.Symbol, PCD.PercentChange, RSI.CompanyName, PCD.AbsoluteChange, PCD.MarketDate 
+                         FROM RootSymbolIndex RSI, PercentChangeData PCD 
+                         WHERE PCD.MarketDate = @MarketDate AND PCD.SymbolId = RSI.ID 
+                         Order By PercentChange Asc;";
+                using (IDbConnection cn = Connection)
+                {
+                    cn.Open();
+                    var result = await cn.QueryAsync<ChangeDataReport>(sqlQuery, parameters);
+                    cn.Close();
+                    stockSymbols = result.ToList();
+                }
+                return stockSymbols;
+            }
+            catch (Exception exc)
+            {
+                stockSymbols = new List<ChangeDataReport>();
+                return stockSymbols;
+            }
+        }
+
+        public async Task<List<ChangeDataReport>> LoadTopDailyGainers(DateTime marketDate)
+        {
+            List<ChangeDataReport> stockSymbols;
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@MarketDate", marketDate);
+                var sqlQuery = @"SELECT TOP(250) RSI.Id, RSI.Symbol, PCD.PercentChange, RSI.CompanyName, PCD.AbsoluteChange, PCD.MarketDate 
+                         FROM RootSymbolIndex RSI, PercentChangeData PCD 
+                         WHERE PCD.MarketDate = @MarketDate AND PCD.SymbolId = RSI.ID 
+                         Order By PercentChange Desc;";
+                using (IDbConnection cn = Connection)
+                {
+                    cn.Open();
+                    var result = await cn.QueryAsync<ChangeDataReport>(sqlQuery, parameters);
+                    cn.Close();
+                    stockSymbols = result.ToList();
+                }
+                return stockSymbols;
+            }
+            catch (Exception exc)
+            {
+                stockSymbols = new List<ChangeDataReport>();
+                return stockSymbols;
+            }
+        }
+
+
+
+
+
 
         public async Task DiscontinueAsset(string symbol, string flag)
         {
@@ -103,7 +213,7 @@ namespace ByteTraderDailyJobs.Connections
                 parameters.Add("@IsAssetDiscontinued", flag);
                 parameters.Add("@DiscontinuedDate", DateTime.Now);
 
-                var sqlCommand = $"UPDATE dbo.SymbolIndex SET IsAssetDiscontinued = @IsAssetAvailable, DiscontinuedDate = @DiscontinuedDate" +
+                var sqlCommand = $"UPDATE dbo.SymbolIndex SET IsAssetDiscontinued = @IsAssetDiscontinued, DiscontinuedDate = @DiscontinuedDate" +
                     $"WHERE Symbol = @Symbol;";
                 using (IDbConnection cn = Connection)
                 {
@@ -117,7 +227,6 @@ namespace ByteTraderDailyJobs.Connections
                     {
                         Console.WriteLine(exc.ToString());
                     }
-
                 }
             }
             catch (Exception exc)
@@ -566,5 +675,15 @@ namespace ByteTraderDailyJobs.Connections
         public DateTime MaxDate { get; set; }
         public string Symbol { get; set; }
         public string MarketDate { get; set; }
+    }
+
+    public class ChangeDataReport
+    {
+        public int Id { get; set; }
+        public string Symbol { get; set; }
+        public decimal PercentChange { get; set; }
+        public string CompanyName { get; set; }
+        public decimal AbsoluteChange { get; set; }
+        public DateTime MarketDate { get; set; }
     }
 }

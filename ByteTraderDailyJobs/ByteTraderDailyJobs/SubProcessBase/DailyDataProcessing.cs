@@ -2,6 +2,7 @@
 using ByteTraderDailyJobs.SubProcessBase.DailyDataProcess;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,22 +10,24 @@ namespace ByteTraderDailyJobs.SubProcessBase
 {
     public class DailyDataProcessing : ProcessBaseConfig
     {
-        public ByteTraderRepository BR = new ByteTraderRepository();
+        public ByteTraderRepository Repo = new ByteTraderRepository();
+        public EmailEngine EmailEngine { get; set; }
         public DailyDataProcessing()
         {
 
-
+            EmailEngine = new EmailEngine();
         }
         public override async void ExecuteProcess()
         {
             await InitializePercentChange();
-            //await ProcessDailyChange();
+            await ProcessDailyChange();
+            await DistributePriceChangeReport();
         }
 
         public async Task InitializePercentChange()
         {
-            var stockList = await BR.QueryAvailableSymbols();
-            var symbolsInPC = await BR.SymbolsInPercentChangeTable();
+            var stockList = await Repo.QueryAvailableSymbols();
+            var symbolsInPC = await Repo.SymbolsInPercentChangeTable();
             foreach (var stock in stockList)
             {
                 if (!symbolsInPC.Contains(stock.SymbolId))
@@ -33,10 +36,10 @@ namespace ByteTraderDailyJobs.SubProcessBase
                     {
                         var endDate = DateTime.Now;
                         var beginDate = endDate.AddDays(-40);
-                        var candleList = await BR.QueryCandlesByDate(stock.SymbolId, beginDate, endDate);
+                        var candleList = await Repo.QueryCandlesByDate(stock.SymbolId, beginDate, endDate);
                         var percentChange = new PercentChange(candleList);
                         percentChange.CalculateChange();
-                        await BR.BulkPercentChangeInsert(percentChange.CalculatedData);
+                        await Repo.BulkPercentChangeInsert(percentChange.CalculatedData);
                     }
                     catch (Exception exc)
                     {
@@ -46,22 +49,99 @@ namespace ByteTraderDailyJobs.SubProcessBase
                 }
             }
         }
+        public string CreateHtmlReport(List<ChangeDataReport> gainers, List<ChangeDataReport> losers)
+        {
+            var htmlBody = new StringBuilder();
+            //gainers
+            htmlBody.Append($"<h2>Top Gainers Data Report</h2>");
+            htmlBody.Append($"<table>");
+
+            htmlBody.Append($"<thead>");
+            htmlBody.Append($"<tr>");
+            htmlBody.Append($"<th>Symbol</th>");
+            htmlBody.Append($"<th>Percent Change</th>");
+            htmlBody.Append($"<th>Company Name</th>");
+            htmlBody.Append($"<th>Absolute Change</th>");
+            htmlBody.Append($"</tr>");
+            htmlBody.Append($"</thead>");
+
+            htmlBody.Append($"<tbody>");
+            foreach (var report in gainers)
+            {
+                htmlBody.Append($"<tr>");
+                htmlBody.Append($"<td>{report.Symbol}</td>");
+                htmlBody.Append($"<td>{report.PercentChange}</td>");
+                htmlBody.Append($"<td>{report.CompanyName}</td>");
+                htmlBody.Append($"<td>{report.AbsoluteChange}</td>");
+                htmlBody.Append($"</tr>");
+            }
+            htmlBody.Append($"</tbody>");
+
+            htmlBody.Append($"</table>");
+
+            htmlBody.Append($"<br>");
+            htmlBody.Append($"<br>");
+
+            //losers
+            htmlBody.Append($"<h2>Top Losers Data Report</h2>");
+            htmlBody.Append($"<table>");
+
+            htmlBody.Append($"<thead>");
+            htmlBody.Append($"<tr>");
+            htmlBody.Append($"<th>Symbol</th>");
+            htmlBody.Append($"<th>Percent Change</th>");
+            htmlBody.Append($"<th>Company Name</th>");
+            htmlBody.Append($"<th>Absolute Change</th>");
+            htmlBody.Append($"</tr>");
+            htmlBody.Append($"</thead>");
+
+            htmlBody.Append($"<tbody>");
+            foreach (var report in losers)
+            {
+                htmlBody.Append($"<tr>");
+                htmlBody.Append($"<td>{report.Symbol}</td>");
+                htmlBody.Append($"<td>{report.PercentChange}</td>");
+                htmlBody.Append($"<td>{report.CompanyName}</td>");
+                htmlBody.Append($"<td>{report.AbsoluteChange}</td>");
+                htmlBody.Append($"</tr>");
+            }
+            htmlBody.Append($"</tbody>");
+
+            htmlBody.Append($"</table>");
+
+            return htmlBody.ToString();
+        }
+
+        public async Task DistributePriceChangeReport()
+        {
+            //var date = new DateTime(2020, 9, 18);
+            var date = DateTime.Now.Date;
+            var gainers = await Repo.LoadTopDailyGainers(date);
+            var losers = await Repo.LoadTopDailyLosers(date);
+            var subscribedUsers = await Repo.GetAppUsers();
+            //subscribedUsers = subscribedUsers.Where(e => e.EnableDailyReports == "Y").ToList();
+            var emails = subscribedUsers.Select(e => e.Email).ToList();
+            var subject = $"Data Report For {date.ToShortDateString()}";
+            var body = CreateHtmlReport(gainers, losers);
+            await EmailEngine.EmailBatchTemplate(emails, subject, body, true);
+        }
+
 
         public async Task ProcessDailyChange()
         {
             try
             {
                 var processDate = DateTime.Now;
-                var stockList = await BR.QueryAvailableSymbols();
+                var stockList = await Repo.QueryAvailableSymbols();
                 foreach (var stock in stockList)
                 {
-                    var ListToProcess = await BR.LoadPercentChangeList(stock.SymbolId);
+                    var ListToProcess = await Repo.LoadPercentChangeList(stock.SymbolId);
                     var percentChange = new PercentChange(ListToProcess);
                     percentChange.CalculateChange();
                     //var result = percentChange.CalculatedData;
 
 
-                    await BR.BulkPercentChangeInsert(percentChange.CalculatedData);
+                    await Repo.BulkPercentChangeInsert(percentChange.CalculatedData);
                 }
             }
             catch (Exception Exc)

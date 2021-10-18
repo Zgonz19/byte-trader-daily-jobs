@@ -339,12 +339,45 @@ namespace ByteTraderDailyJobs.SubProcessBase
   
         }
 
+        public async void CheckAssetAvailability(IAsset stock, IAlpacaDataClient client5)
+        {
+            var endDate = DateTime.Now.AddHours(-1);
+            var startDate = endDate.AddDays(-7);
+            var tickers = await Repo.QueryNightlyBars();
+            //var test = tickers.FirstOrDefault(e => e.Symbol == stock.Symbol);
+            IPage<IBar> bars;
+            try
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(0.6));
+                bars = client5.ListHistoricalBarsAsync(new HistoricalBarsRequest(stock.Symbol, startDate, endDate, BarTimeFrame.Day)).Result;
+                var test1 = bars.Items;
+                var test2 = test1.Count;
+            }
+            catch (Exception exc)
+            {
+                bars = null;
+            }
+            List<IBar> barList;
+            if (bars == null)
+            {
+                barList = new List<IBar>();
+            }
+            else
+            {
+                barList = bars.Items.ToList();
+            }
+
+            if (barList.Count == 0)
+            {
+                await Repo.DiscontinueAsset(stock.Symbol, "Y");
+            }
+        }
+
         public async void ProcessDailyCandlesAlpaca(IAsset stock, IAlpacaDataClient client5)
         {
             var endDate = DateTime.Now.AddHours(-1);
             var tickers = await Repo.QueryNightlyBars();
             var test = tickers.FirstOrDefault(e => e.Symbol == stock.Symbol);
-            //var bars = client5.ListHistoricalBarsAsync(new HistoricalBarsRequest(stock.Symbol, test.MaxDate, endDate, BarTimeFrame.Day)).Result;
             IPage<IBar> bars;
             try
             {
@@ -368,12 +401,11 @@ namespace ByteTraderDailyJobs.SubProcessBase
 
             if (barList.Count == 0)
             {
-                //discontinue asset of api no longer returns data                       
+                CheckAssetAvailability(stock, client5);
             }
             else
             {
                 var candleList = new List<candles>();
-
                 foreach (var item in barList)
                 {
                     var candle = new candles
@@ -416,8 +448,6 @@ namespace ByteTraderDailyJobs.SubProcessBase
             {
                 barList = bars.Items.ToList();
             }
-
-
 
             if (barList.Count == 0)
             {
