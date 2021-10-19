@@ -1,5 +1,7 @@
 ﻿using ByteTraderDailyJobs.Connections;
 using ByteTraderDailyJobs.SubProcessBase.DailyDataProcess;
+using NLog;
+using NLog.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,8 @@ namespace ByteTraderDailyJobs.SubProcessBase
 {
     public class DailyDataProcessing : ProcessBaseConfig
     {
+        public Logger Logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+
         public ByteTraderRepository Repo = new ByteTraderRepository();
         public EmailEngine EmailEngine { get; set; }
         public DailyDataProcessing()
@@ -23,6 +27,12 @@ namespace ByteTraderDailyJobs.SubProcessBase
             await ProcessDailyChange();
             await DistributePriceChangeReport();
         }
+
+
+        //ADTV 10, 20, and 30 day avg, when daily volumne less than 400,000, considered thinly traded. lets aim for 1 million filter
+        //method to find dollar volume when needed (price of stock * daily volume) minimum 20 to 15 million
+
+
 
         public async Task InitializePercentChange()
         {
@@ -43,7 +53,7 @@ namespace ByteTraderDailyJobs.SubProcessBase
                     }
                     catch (Exception exc)
                     {
-
+                        Logger.Info(exc.ToString());
                     }
 
                 }
@@ -139,14 +149,12 @@ namespace ByteTraderDailyJobs.SubProcessBase
                     var percentChange = new PercentChange(ListToProcess);
                     percentChange.CalculateChange();
                     //var result = percentChange.CalculatedData;
-
-
                     await Repo.BulkPercentChangeInsert(percentChange.CalculatedData);
                 }
             }
             catch (Exception Exc)
             {
-                //Logger.Info(Exc.ToString());
+                Logger.Info(Exc.ToString());
             }
         }
 

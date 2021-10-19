@@ -16,7 +16,7 @@ namespace ByteTraderDailyJobs.Connections
 {
     public class ByteTraderRepository : DbContext
     {
-        //public Logger Logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+        public Logger Logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
         //public async Task<SymbolIndex> GetSystemDefault(string attributeName)
         //{
         //    var parameters = new DynamicParameters();
@@ -48,7 +48,7 @@ namespace ByteTraderDailyJobs.Connections
             using (IDbConnection cn = Connection)
             {
                 cn.Open();
-                var result = await cn.QueryAsync<AppUsers>(sqlQuery);
+                var result = cn.QueryAsync<AppUsers>(sqlQuery).GetAwaiter().GetResult();
                 cn.Close();
                 appUsers = result.ToList();
             }
@@ -73,7 +73,7 @@ namespace ByteTraderDailyJobs.Connections
             catch (Exception exc)
             {
                 index = null;
-                //Logger.Info(exc.ToString());
+                Logger.Info(exc.ToString());
             }
 
             return index;
@@ -123,14 +123,14 @@ namespace ByteTraderDailyJobs.Connections
                     }
                     catch (Exception exc)
                     {
-                        Console.WriteLine(exc.ToString());
+                        Logger.Info(exc.ToString());
                     }
 
                 }
             }
             catch (Exception exc)
             {
-                Console.WriteLine(exc.ToString());
+                Logger.Info(exc.ToString());
             }
         }
 
@@ -159,7 +159,7 @@ namespace ByteTraderDailyJobs.Connections
                 using (IDbConnection cn = Connection)
                 {
                     cn.Open();
-                    var result = await cn.QueryAsync<ChangeDataReport>(sqlQuery, parameters);
+                    var result = cn.QueryAsync<ChangeDataReport>(sqlQuery, parameters).GetAwaiter().GetResult();
                     cn.Close();
                     stockSymbols = result.ToList();
                 }
@@ -167,6 +167,7 @@ namespace ByteTraderDailyJobs.Connections
             }
             catch (Exception exc)
             {
+                Logger.Info(exc.ToString());
                 stockSymbols = new List<ChangeDataReport>();
                 return stockSymbols;
             }
@@ -186,7 +187,7 @@ namespace ByteTraderDailyJobs.Connections
                 using (IDbConnection cn = Connection)
                 {
                     cn.Open();
-                    var result = await cn.QueryAsync<ChangeDataReport>(sqlQuery, parameters);
+                    var result = cn.QueryAsync<ChangeDataReport>(sqlQuery, parameters).GetAwaiter().GetResult();
                     cn.Close();
                     stockSymbols = result.ToList();
                 }
@@ -194,6 +195,7 @@ namespace ByteTraderDailyJobs.Connections
             }
             catch (Exception exc)
             {
+                Logger.Info(exc.ToString());
                 stockSymbols = new List<ChangeDataReport>();
                 return stockSymbols;
             }
@@ -225,13 +227,13 @@ namespace ByteTraderDailyJobs.Connections
                     }
                     catch (Exception exc)
                     {
-                        Console.WriteLine(exc.ToString());
+                        Logger.Info(exc.ToString());
                     }
                 }
             }
             catch (Exception exc)
             {
-                Console.WriteLine(exc.ToString());
+                Logger.Info(exc.ToString());
             }
         }
 
@@ -255,14 +257,14 @@ namespace ByteTraderDailyJobs.Connections
                     }
                     catch (Exception exc)
                     {
-                        Console.WriteLine(exc.ToString());
+                        Logger.Info(exc.ToString());
                     }
 
                 }
             }
             catch (Exception exc)
             {
-                Console.WriteLine(exc.ToString());
+                Logger.Info(exc.ToString());
             }
         }
 
@@ -310,14 +312,14 @@ namespace ByteTraderDailyJobs.Connections
                     }
                     catch (Exception exc)
                     {
-                        Console.WriteLine(exc.ToString());
+                        Logger.Info(exc.ToString());
                     }
 
                 }
             }
             catch (Exception exc)
             {
-                Console.WriteLine(exc.ToString());
+                Logger.Info(exc.ToString());
             }
         }
 
@@ -370,7 +372,7 @@ namespace ByteTraderDailyJobs.Connections
         public async Task<List<SymbolIndex>> QueryAvailableSymbols()
         {
             List<SymbolIndex> stockSymbols;
-            var sqlQuery = "select * from dbo.SymbolIndex where IsAssetAvailable = 'Y'";
+            var sqlQuery = "select * from dbo.SymbolIndex where IsAssetAvailable = 'Y' AND IsAssetDiscontinued IS NULL ";
             using (IDbConnection cn = Connection)
             {
                 try
@@ -483,8 +485,6 @@ namespace ByteTraderDailyJobs.Connections
             foreach (var candle in data)
             {
                 var dateStamp = GenerateDateString(candle.datetime);
-
-
                 var row = new Object[]
                 {
                     symbolId,
@@ -503,31 +503,22 @@ namespace ByteTraderDailyJobs.Connections
                 {
                     var x = table.Rows;
                     var ttt = x[datestrings.Count - 1];
-                    Console.WriteLine("RIP");
                     var x2 = ttt[9];
                     var x4 = row[9];
-
-
                     if((DateTime)x4 > (DateTime)x2)
                     {
                         table.Rows.Remove(ttt);
                         table.Rows.Add(row);
                     }
                 }
-
                 else
                 {
                     datestrings.Add(dateStamp);
                     table.Rows.Add(row);
                 }
-
             }
             return table;
         }
-
-
-
-
         public async Task<List<HistoricalDailyCandles>> QueryCandlesByDate(int SymbolId, DateTime BeginDate, DateTime EndDate)
         {
             List<HistoricalDailyCandles> stockSymbols;
@@ -547,6 +538,7 @@ namespace ByteTraderDailyJobs.Connections
             }
             catch (Exception exc)
             {
+                Logger.Info(exc.ToString());
                 stockSymbols = null;
             }
             return stockSymbols;
@@ -659,14 +651,9 @@ namespace ByteTraderDailyJobs.Connections
             }
             catch (Exception exc)
             {
-                //Logger.Info(exc.ToString());
+                Logger.Info(exc.ToString());
             }
         }
-
-
-
-
-
     }
 
     public class NightlyBarsModel
