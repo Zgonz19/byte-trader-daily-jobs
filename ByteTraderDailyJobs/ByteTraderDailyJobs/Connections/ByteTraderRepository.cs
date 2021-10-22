@@ -17,30 +17,6 @@ namespace ByteTraderDailyJobs.Connections
     public class ByteTraderRepository : DbContext
     {
         public Logger Logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-        //public async Task<SymbolIndex> GetSystemDefault(string attributeName)
-        //{
-        //    var parameters = new DynamicParameters();
-        //    parameters.Add("@AttributeName", attributeName);
-        //    SymbolIndex index;
-        //    var sqlQuery = @"SELECT * FROM SystemDefaults WHERE AttributeName = @AttributeName;";
-        //    try
-        //    {
-        //        using (IDbConnection cn = Connection)
-        //        {
-        //            cn.Open();
-        //            var result = cn.QueryAsync<SymbolIndex>(sqlQuery, parameters).GetAwaiter().GetResult();
-        //            cn.Close();
-        //            index = result.FirstOrDefault();
-        //        }
-        //    }
-        //    catch (Exception exc)
-        //    {
-        //        index = null;
-        //        Logger.Info(exc.ToString());
-        //    }
-
-        //    return index;
-        //}
         public async Task<List<AppUsers>> GetAppUsers()
         {
             List<AppUsers> appUsers;
@@ -78,10 +54,6 @@ namespace ByteTraderDailyJobs.Connections
 
             return index;
         }
-
-
-
-
         public async Task<List<NightlyBarsModel>> QueryNightlyBars()
         {
             List<NightlyBarsModel> nighlyBars;
@@ -92,7 +64,7 @@ namespace ByteTraderDailyJobs.Connections
             using (IDbConnection cn = Connection)
             {
                 cn.Open();
-                var result = cn.QueryAsync<NightlyBarsModel>(sqlQuery).Result;
+                var result = cn.QueryAsync<NightlyBarsModel>(sqlQuery, commandTimeout: 200000).Result;
                 cn.Close();
                 nighlyBars = result.ToList();
             }
@@ -102,7 +74,6 @@ namespace ByteTraderDailyJobs.Connections
         {
             await BulkCandleInsert(candles, symbolId, symbol);
         }
-
         public async Task SetCaptureDate(string symbol)
         {
             try
@@ -133,18 +104,6 @@ namespace ByteTraderDailyJobs.Connections
                 Logger.Info(exc.ToString());
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
         public async Task<List<ChangeDataReport>> LoadTopDailyLosers(DateTime marketDate)
         {
             List<ChangeDataReport> stockSymbols;
@@ -172,7 +131,6 @@ namespace ByteTraderDailyJobs.Connections
                 return stockSymbols;
             }
         }
-
         public async Task<List<ChangeDataReport>> LoadTopDailyGainers(DateTime marketDate)
         {
             List<ChangeDataReport> stockSymbols;
@@ -200,12 +158,6 @@ namespace ByteTraderDailyJobs.Connections
                 return stockSymbols;
             }
         }
-
-
-
-
-
-
         public async Task DiscontinueAsset(string symbol, string flag)
         {
             try
@@ -215,7 +167,7 @@ namespace ByteTraderDailyJobs.Connections
                 parameters.Add("@IsAssetDiscontinued", flag);
                 parameters.Add("@DiscontinuedDate", DateTime.Now);
 
-                var sqlCommand = $"UPDATE dbo.SymbolIndex SET IsAssetDiscontinued = @IsAssetDiscontinued, DiscontinuedDate = @DiscontinuedDate" +
+                var sqlCommand = $"UPDATE dbo.SymbolIndex SET IsAssetDiscontinued = @IsAssetDiscontinued, DiscontinuedDate = @DiscontinuedDate " +
                     $"WHERE Symbol = @Symbol;";
                 using (IDbConnection cn = Connection)
                 {
@@ -236,7 +188,6 @@ namespace ByteTraderDailyJobs.Connections
                 Logger.Info(exc.ToString());
             }
         }
-
         public async Task SetAssetFlag(string symbol, string flag)
         {
             try
@@ -267,7 +218,6 @@ namespace ByteTraderDailyJobs.Connections
                 Logger.Info(exc.ToString());
             }
         }
-
         public async Task<int> QuerySymbolId(string symbol)
         {
             var parameters = new DynamicParameters();
@@ -290,6 +240,73 @@ namespace ByteTraderDailyJobs.Connections
 
             }
             return symbolId;
+        }
+
+
+        public async Task InsertWeeklyVolume(int SymbolId, string DateString, int TargetChange, int CountP, int CountN, string TrendString)
+        {
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@SymbolId", SymbolId);
+                parameters.Add("@DateString", DateString);
+                parameters.Add("@TargetChange", TargetChange);
+                parameters.Add("@CountP", CountP);
+                parameters.Add("@CountN", CountN);
+                parameters.Add("@TrendString", TrendString);
+
+                var sqlCommand = $"INSERT INTO dbo.WeeklyVolatility (SymbolId, DateString, TargetChange, CountP, CountN, TrendString)" +
+                    $"VALUES (@SymbolId, @DateString, @TargetChange, @CountP, @CountN, @TrendString);";
+                using (IDbConnection cn = Connection)
+                {
+                    try
+                    {
+                        cn.Open();
+                        cn.Execute(sqlCommand, parameters);
+                        cn.Close();
+                    }
+                    catch (Exception exc)
+                    {
+                        Logger.Info(exc.ToString());
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                Logger.Info(exc.ToString());
+            }
+        }
+        public async Task InsertAverageVolume(int SymbolId, string DateString, double? Avg10, double? Avg20, double? Avg30)
+        {
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@SymbolId", SymbolId);
+                parameters.Add("@DateString", DateString);
+                parameters.Add("@Avg10", Avg10);
+                parameters.Add("@Avg20", Avg20);
+                parameters.Add("@Avg30", Avg30);
+
+                var sqlCommand = $"INSERT INTO dbo.AverageTradeVolume (SymbolId, DateString, Avg10, Avg20, Avg30)" +
+                    $"VALUES (@SymbolId, @DateString, @Avg10, @Avg20, Avg30);";
+                using (IDbConnection cn = Connection)
+                {
+                    try
+                    {
+                        cn.Open();
+                        cn.Execute(sqlCommand, parameters);
+                        cn.Close();
+                    }
+                    catch (Exception exc)
+                    {
+                        Logger.Info(exc.ToString());
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                Logger.Info(exc.ToString());
+            }
         }
 
         public async Task InsertStock(string Symbol, string Description)
@@ -322,8 +339,6 @@ namespace ByteTraderDailyJobs.Connections
                 Logger.Info(exc.ToString());
             }
         }
-
-
         public async Task<List<SymbolIndex>> QueryAllSymbols()
         {
             List<SymbolIndex> stockSymbols;
@@ -345,8 +360,6 @@ namespace ByteTraderDailyJobs.Connections
             }
             return stockSymbols;
         }
-
-
         public async Task<List<SymbolIndex>> QuerySymbols()
         {
             List<SymbolIndex> stockSymbols;
@@ -368,7 +381,6 @@ namespace ByteTraderDailyJobs.Connections
             }
             return stockSymbols;
         }
-
         public async Task<List<SymbolIndex>> QueryAvailableSymbols()
         {
             List<SymbolIndex> stockSymbols;
@@ -390,8 +402,6 @@ namespace ByteTraderDailyJobs.Connections
             }
             return stockSymbols;
         }
-
-
         public async Task BulkCandleInsert(List<candles> data, int symbolId, string symbol)
         {
             try
@@ -424,19 +434,14 @@ namespace ByteTraderDailyJobs.Connections
                 Console.WriteLine(exc.ToString());
             }
         }
-
         public string GenerateDateString(DateTime date)
         {
             return date.Day.ToString("00") + date.Month.ToString("00") + date.Year;
         }
-
         public static DateTime ConvertUnixTimeStamp(long? unixTimeStamp)
         {
             return new DateTime(1970, 1, 1, 0, 0, 0).AddMilliseconds((long)unixTimeStamp);
         }
-
-
-
         public dynamic NaNToNull(string t)
         {
             if(t == "NaN" || String.IsNullOrWhiteSpace(t))
@@ -465,7 +470,6 @@ namespace ByteTraderDailyJobs.Connections
                 }
             }
         }
-
         public DataTable ListBarsToDataTable(List<candles> data, int symbolId, string symbol)
         {
             var table = new DataTable();
@@ -543,7 +547,6 @@ namespace ByteTraderDailyJobs.Connections
             }
             return stockSymbols;
         }
-
         public async Task<List<int>> SymbolsInPercentChangeTable()
         {
             List<int> stockSymbols;
@@ -572,36 +575,6 @@ namespace ByteTraderDailyJobs.Connections
             }
             return stockSymbols;
         }
-
-        //public DataTable ListToDataTable(List<candles> data, int symbolId)
-        //{
-        //    var table = new DataTable();
-        //    table.Columns.Add("SymbolId", typeof(int));
-        //    table.Columns.Add("MarketDate", typeof(DateTime));
-        //    table.Columns.Add("Open", typeof(decimal));
-        //    table.Columns.Add("High", typeof(decimal));
-        //    table.Columns.Add("Low", typeof(decimal));
-        //    table.Columns.Add("Close", typeof(decimal));
-        //    table.Columns.Add("Volume", typeof(long));
-        //    table.Columns.Add("AdjustedClose", typeof(decimal));
-        //    foreach (var candle in data)
-        //    {
-        //        var row = new Object[]
-        //        {
-        //            symbolId,
-        //            candle.DateTime,
-        //            candle.Open,
-        //            candle.High,
-        //            candle.Low,
-        //            candle.Close,
-        //            candle.Volume,
-        //            candle.AdjustedClose
-        //        };
-        //        table.Rows.Add(row);
-        //    }
-        //    return table;
-        //}
-
         public DataTable ListPercentChangeToDataTable(List<PercentChangeData> data)
         {
             var table = new DataTable();
@@ -672,5 +645,35 @@ namespace ByteTraderDailyJobs.Connections
         public string CompanyName { get; set; }
         public decimal AbsoluteChange { get; set; }
         public DateTime MarketDate { get; set; }
+
+        //public DataTable ListToDataTable(List<candles> data, int symbolId)
+        //{
+        //    var table = new DataTable();
+        //    table.Columns.Add("SymbolId", typeof(int));
+        //    table.Columns.Add("MarketDate", typeof(DateTime));
+        //    table.Columns.Add("Open", typeof(decimal));
+        //    table.Columns.Add("High", typeof(decimal));
+        //    table.Columns.Add("Low", typeof(decimal));
+        //    table.Columns.Add("Close", typeof(decimal));
+        //    table.Columns.Add("Volume", typeof(long));
+        //    table.Columns.Add("AdjustedClose", typeof(decimal));
+        //    foreach (var candle in data)
+        //    {
+        //        var row = new Object[]
+        //        {
+        //            symbolId,
+        //            candle.DateTime,
+        //            candle.Open,
+        //            candle.High,
+        //            candle.Low,
+        //            candle.Close,
+        //            candle.Volume,
+        //            candle.AdjustedClose
+        //        };
+        //        table.Rows.Add(row);
+        //    }
+        //    return table;
+        //}
+
     }
 }

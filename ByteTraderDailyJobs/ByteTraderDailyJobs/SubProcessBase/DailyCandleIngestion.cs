@@ -1,5 +1,4 @@
 ﻿using System;
-using Abbotware.Interop.TDAmeritrade;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
@@ -11,6 +10,7 @@ using ByteTraderDailyJobs.Connections;
 using ByteTraderDailyJobs.SubProcessBase.DailyCandleIngestionProcess;
 using System.Threading.Tasks;
 using System.Threading;
+using Microsoft.Extensions.Logging;
 
 namespace ByteTraderDailyJobs.SubProcessBase
 {
@@ -32,6 +32,7 @@ namespace ByteTraderDailyJobs.SubProcessBase
         }
         public override async void ExecuteProcess()
         {
+            //ProcessTestingMethod();
             await AlpacaDataIngestion();
             //await PriceHistoryDataUpdate();
         }
@@ -110,6 +111,33 @@ namespace ByteTraderDailyJobs.SubProcessBase
             }
         }
 
+        public List<candles> FilterOutput(List<candles> bars, NightlyBarsModel barsModel, DateTime runDate)
+        {
+            //var maxDateUnix = (long?)DateTimeToUnixTimestamp(barsModel.MaxDate);
+            var maxDateUnix = runDate;
+            var test1 = runDate;
+            var runDateUnix = test1;
+            var datesList = bars.Select(e => e.datetime).ToList();
+            if (datesList.Contains(maxDateUnix))
+            {
+                var candle = bars.FirstOrDefault(e => e.datetime == maxDateUnix);
+                bars.Remove(candle);
+                //var datemax = datesList.Max();
+                //var datemin = datesList.Min();
+                //var maxdate = new DateTime((long)datemax);
+                //var mindate = new DateTime((long)datemin);
+                //if (maxdate == barsModel.MaxDate || mindate == barsModel.MaxDate)
+                //{
+                //}
+            }
+            if (datesList.Contains(runDateUnix))
+            {
+                var candle = bars.FirstOrDefault(e => e.datetime == runDateUnix);
+                bars.Remove(candle);
+            }
+            return bars;
+        }
+
         public override void SetDailyTaskParameters()
         {
 
@@ -179,8 +207,6 @@ namespace ByteTraderDailyJobs.SubProcessBase
                 {
                     Console.WriteLine(exc.ToString());
                 }
-
-
             }
 
 
@@ -279,24 +305,62 @@ namespace ByteTraderDailyJobs.SubProcessBase
                 SymbolOnboarding(item, client5);
                 Thread.Sleep(TimeSpan.FromSeconds(0.6));
             }
+            var tickers2 = await Repo.QueryNightlyBars();
+            //var tickers = tickers2.Where(e => e.MaxDate < DateTime.Now.Date).ToList();
+
             foreach (var item in dailyCandlesToLoad)
             {
-                ProcessDailyCandlesAlpaca(item, client5);
+
+                ProcessDailyCandlesAlpaca(endDate, item, client5, tickers2);
                 Thread.Sleep(TimeSpan.FromSeconds(0.6));
+                //if (tickers.Contains(tickers.FirstOrDefault(e => e.Symbol == item.Symbol)))
+                //{
+
+                //}
             }
         }
 
+
+
         public async void ProcessTestingMethod()
         {
+
+
+            var client22 = Alpaca.Markets.Environments.Live.GetAlpacaDataStreamingClient(new SecretKey(AlpacaApiKey, AlpacaSecretKey));
+            var client2234 = Alpaca.Markets.Environments.Live.GetAlpacaDataClient(new SecretKey(AlpacaApiKey, AlpacaSecretKey));
+            var xxxx = client22.GetMinuteBarSubscription();
+
+            var testList = new List<string>{ "AAPL", "AMD" };
+
+
+            var testing = client2234.GetSnapshotsAsync(testList).Result;
+
+           var test555 = client2234.ListHistoricalBarsAsync(new HistoricalBarsRequest("AAPL", DateTime.Now.AddMinutes(-25), DateTime.Now.AddMinutes(-20), BarTimeFrame.Minute)).Result;
+
+            var xxxx2 = client22.GetMinuteBarSubscription("TSLA");
+
+            
+
+
+
             var client = Alpaca.Markets.Environments.Paper
     .GetAlpacaDataClient(new SecretKey(AlpacaApiKey, AlpacaSecretKey));
+
+            var test666 = client.ListHistoricalBarsAsync(new HistoricalBarsRequest("AAPL", DateTime.Now.AddMinutes(-5), DateTime.Now, BarTimeFrame.Minute)).Result;
+
             await CaptureDailyCandles();
+
+
+
             //CaptureHistoricalDailyCandles();
             var repo = new ByteTraderRepository();
 
             var tableRows = await repo.QuerySymbols();
 
             var client2 = Alpaca.Markets.Environments.Live.GetAlpacaTradingClient(new SecretKey(AlpacaApiKey, AlpacaSecretKey));
+
+
+            //var client2 = Alpaca.Markets.Environments.Live.GetAlpacaTradingClient(new SecretKey(AlpacaApiKey, AlpacaSecretKey));
 
             var asset = new AssetsRequest { AssetStatus = AssetStatus.Active };
 
@@ -341,9 +405,9 @@ namespace ByteTraderDailyJobs.SubProcessBase
 
         public async void CheckAssetAvailability(IAsset stock, IAlpacaDataClient client5)
         {
-            var endDate = DateTime.Now.AddHours(-1);
+            var endDate = DateTime.Now;
             var startDate = endDate.AddDays(-7);
-            var tickers = await Repo.QueryNightlyBars();
+            //var tickers = await Repo.QueryNightlyBars();
             //var test = tickers.FirstOrDefault(e => e.Symbol == stock.Symbol);
             IPage<IBar> bars;
             try
@@ -373,58 +437,70 @@ namespace ByteTraderDailyJobs.SubProcessBase
             }
         }
 
-        public async void ProcessDailyCandlesAlpaca(IAsset stock, IAlpacaDataClient client5)
+        public async void ProcessDailyCandlesAlpaca(DateTime endDate, IAsset stock, IAlpacaDataClient client5, List<NightlyBarsModel> tickers)
         {
-            var endDate = DateTime.Now.AddHours(-1);
-            var tickers = await Repo.QueryNightlyBars();
+            //var endDate = DateTime.Now;
+            
             var test = tickers.FirstOrDefault(e => e.Symbol == stock.Symbol);
-            IPage<IBar> bars;
-            try
+
+            if(test == null)
             {
-                bars = client5.ListHistoricalBarsAsync(new HistoricalBarsRequest(stock.Symbol, test.MaxDate, endDate, BarTimeFrame.Day)).Result;
-                var test1 = bars.Items;
-                var test2 = test1.Count;
-            }
-            catch (Exception exc)
-            {
-                bars = null;
-            }
-            List<IBar> barList;
-            if (bars == null)
-            {
-                barList = new List<IBar>();
+                SymbolOnboarding(stock, client5);
             }
             else
             {
-                barList = bars.Items.ToList();
+                IPage<IBar> bars;
+                try
+                {
+                    bars = client5.ListHistoricalBarsAsync(new HistoricalBarsRequest(stock.Symbol, test.MaxDate, endDate, BarTimeFrame.Day)).Result;
+                    var test1 = bars.Items;
+                    var test2 = test1.Count;
+                }
+                catch (Exception exc)
+                {
+                    bars = null;
+                }
+                List<IBar> barList;
+                if (bars == null)
+                {
+                    barList = new List<IBar>();
+                }
+                else
+                {
+                    barList = bars.Items.ToList();
+                }
+
+                if (barList.Count == 0)
+                {
+                    CheckAssetAvailability(stock, client5);
+                }
+                else
+                {
+                    var candleList = new List<candles>();
+
+                    foreach (var item in barList)
+                    {
+                        var candle = new candles
+                        {
+                            close = item.Close.ToString(),
+                            datetime = item.TimeUtc,
+                            high = item.High.ToString(),
+                            low = item.Low.ToString(),
+                            open = item.Open.ToString(),
+                            volume = item.Volume.ToString()
+                        };
+                        candleList.Add(candle);
+                    }
+                    var filteredBars = FilterOutput(candleList, test, test.MaxDate);
+                    Repo.InsertHistoricalCandles(filteredBars, stock.Symbol, test.SymbolId);
+                }
             }
 
-            if (barList.Count == 0)
-            {
-                CheckAssetAvailability(stock, client5);
-            }
-            else
-            {
-                var candleList = new List<candles>();
-                foreach (var item in barList)
-                {
-                    var candle = new candles
-                    {
-                        close = item.Close.ToString(),
-                        datetime = item.TimeUtc,
-                        high = item.High.ToString(),
-                        low = item.Low.ToString(),
-                        open = item.Open.ToString(),
-                        volume = item.Volume.ToString()
-                    };
-                    candleList.Add(candle);
-                }
-                Repo.InsertHistoricalCandles(candleList, stock.Symbol, test.SymbolId);
-            }
+
         }
         public async void SymbolOnboarding(IAsset stock, IAlpacaDataClient client5)
         {
-            var startDate = new DateTime(2016, 1, 1);
+            var startDate = new DateTime(2018, 1, 1);
             var endDate = DateTime.Now.AddHours(-1);
             //onboard new Symbol
             await Repo.InsertStock(stock.Symbol, stock.Name);

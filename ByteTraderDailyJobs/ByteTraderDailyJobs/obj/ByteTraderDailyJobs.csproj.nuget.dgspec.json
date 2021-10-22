@@ -46,10 +46,6 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
-            "Abbotware.Interop.TDAmeritrade": {
-              "target": "Package",
-              "version": "[4.0.224, )"
-            },
             "Alpaca.Markets": {
               "target": "Package",
               "version": "[5.0.6, )"

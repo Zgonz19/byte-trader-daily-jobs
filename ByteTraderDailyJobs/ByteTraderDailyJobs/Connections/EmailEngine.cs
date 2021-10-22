@@ -4,6 +4,8 @@ using System.Text;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using NLog.Web;
+using NLog;
 
 namespace ByteTraderDailyJobs.Connections
 {
@@ -11,6 +13,7 @@ namespace ByteTraderDailyJobs.Connections
     {
         public ByteTraderRepository Repo = new ByteTraderRepository();
 
+        public Logger Logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
         private EmailConfig EmailConfig { get; set; }
         public EmailEngine()
         {
@@ -63,7 +66,7 @@ namespace ByteTraderDailyJobs.Connections
             }
             catch (Exception exc)
             {
-
+                Logger.Info(exc.ToString());
             }
         }
         public async Task SendEmailBatch(List<string> emails, string body, string subject)
@@ -99,7 +102,7 @@ namespace ByteTraderDailyJobs.Connections
             }
             catch (Exception exc)
             {
-
+                Logger.Info(exc.ToString());
             }
 
         }
@@ -124,7 +127,7 @@ namespace ByteTraderDailyJobs.Connections
             }
             catch (Exception exc)
             {
-
+                Logger.Info(exc.ToString());
             }
 
         }
