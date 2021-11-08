@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using NLog.Web;
 using NLog;
+using System.Net.Mime;
 
 namespace ByteTraderDailyJobs.Connections
 {
@@ -94,6 +95,34 @@ namespace ByteTraderDailyJobs.Connections
                 mail.Subject = subject;
                 mail.Body = body;
 
+                SmtpServer.Port = EmailConfig.Port;
+                SmtpServer.Credentials = new System.Net.NetworkCredential(EmailConfig.Username, EmailConfig.Password);
+                SmtpServer.EnableSsl = true;
+
+                SmtpServer.Send(mail);
+            }
+            catch (Exception exc)
+            {
+                Logger.Info(exc.ToString());
+            }
+
+        }
+
+        public async Task SendEmailAttachment(string email, string body, string subject, string filePath)
+        {
+            try
+            {
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient(EmailConfig.SmtpServer);
+                Attachment file = new Attachment(filePath);
+                mail.From = new MailAddress(EmailConfig.EmailAddress);
+                mail.To.Add(email);
+
+                mail.Subject = subject;
+                mail.Body = body;
+
+
+                mail.Attachments.Add(file);
                 SmtpServer.Port = EmailConfig.Port;
                 SmtpServer.Credentials = new System.Net.NetworkCredential(EmailConfig.Username, EmailConfig.Password);
                 SmtpServer.EnableSsl = true;

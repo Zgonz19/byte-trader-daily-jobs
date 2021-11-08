@@ -33,12 +33,21 @@ namespace ByteTraderDailyJobs
 
         public void ExecuteProcessList()
         {
-            var folders = FolderProcessor.ReadFolderList();
-
-            foreach(var folder in folders)
+            try
             {
-                FolderProcessor.ExecuteFolderTask(folder);
+                var folders = FolderProcessor.ReadFolderList();
+
+                foreach (var folder in folders)
+                {
+                    FolderProcessor.ExecuteFolderTask(folder);
+                }
             }
+            catch (Exception exc)
+            {
+                Console.WriteLine(exc.ToString());
+            }
+
+
         }
 
     }

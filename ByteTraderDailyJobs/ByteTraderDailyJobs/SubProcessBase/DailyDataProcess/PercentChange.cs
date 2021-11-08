@@ -84,10 +84,6 @@ namespace ByteTraderDailyJobs.SubProcessBase.DailyDataProcess
         {
             try
             {
-                if (FilteredInputList.Exists(e => e.Count == 1))
-                {
-                    var xx = 666;
-                }
                 var dataRows = new List<PercentChangeData>();
                 foreach (var points in FilteredInputList)
                 {
@@ -111,6 +107,7 @@ namespace ByteTraderDailyJobs.SubProcessBase.DailyDataProcess
                                     percentChange.PreviousMarketDate = pastPrice.DateTime;
                                     percentChange.AbsoluteChange = price.Close - pastPrice.Close;
                                     percentChange.PercentChange = 100 * ((price.Close - pastPrice.Close) / pastPrice.Close);
+                                    percentChange.VolumePercentChange = 100 * ((price.Volume - pastPrice.Volume) / pastPrice.Volume);
                                     percentChange.SymbolId = price.SymbolId;
                                     dataRows.Add(percentChange);
                                 }

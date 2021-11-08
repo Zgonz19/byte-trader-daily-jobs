@@ -12,12 +12,14 @@ namespace ByteTraderDailyJobs.CoreProcess
         string BaseFolderPath = "";
         public FolderListProcessor()
         {
-            BaseFolderPath = @"C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\DailyProcessList";
+            //BaseFolderPath = @"C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\DailyProcessList";
+            BaseFolderPath = @"E:\ByteTraderProduction\DailyProcessList";
         }
 
 
         public List<FolderBase> ReadFolderList()
         {
+
             var folderList = new List<FolderBase>();
 
 
@@ -38,8 +40,6 @@ namespace ByteTraderDailyJobs.CoreProcess
                 TypeNameHandling = TypeNameHandling.All
             };
             string output = JsonConvert.SerializeObject(testObject, settings);
-            //File.WriteAllText("", output);
-            //File.WriteAllText(task.FolderDirectory.FullName + "\\DailyCandleIngestionConfig.json", output);
         }
 
 
@@ -53,28 +53,6 @@ namespace ByteTraderDailyJobs.CoreProcess
             {
 
             }
-
-
-
-
-            //CreateJsonConfig(task);
-            //task.SetJsonText();
-            //var testObject = new DailyCandleIngestion();
-            //testObject.ProcessConfig = testObject;
-            //JsonSerializerSettings settings = new JsonSerializerSettings
-            //{
-            //    TypeNameHandling = TypeNameHandling.All
-            //};
-            //string output = JsonConvert.SerializeObject(testObject, settings);
-
-            //File.WriteAllText(task.FolderDirectory.FullName + "\\DailyCandleIngestionConfig.json", output);
-
-
-            //if (task.Completed == false && task.ExecuteTask == true)
-            //{
-                
-            //}
-
         }
     }
 }

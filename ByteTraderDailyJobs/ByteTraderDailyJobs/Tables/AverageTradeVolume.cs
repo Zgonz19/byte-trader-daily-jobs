@@ -11,6 +11,5 @@ namespace ByteTraderDailyJobs.Tables
         public decimal Avg10 { get; set; }
         public decimal Avg20 { get; set; }
         public decimal Avg30 { get; set; }
-
     }
 }

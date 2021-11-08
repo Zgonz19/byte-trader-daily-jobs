@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v3.1": {
       "ByteTraderDailyJobs/1.0.0": {
         "dependencies": {
+          "Abbotware.Interop.TDAmeritrade": "4.0.230",
           "Alpaca.Markets": "5.0.6",
           "Dapper": "2.0.90",
           "NLog.Web.AspNetCore": "4.13.0",
@@ -16,6 +17,52 @@
         },
         "runtime": {
           "ByteTraderDailyJobs.dll": {}
+        }
+      },
+      "Abbotware.Core/4.0.230": {
+        "runtime": {
+          "lib/netstandard2.1/Abbotware.Core.dll": {
+            "assemblyVersion": "4.0.230.0",
+            "fileVersion": "4.0.230.0"
+          }
+        }
+      },
+      "Abbotware.Interop.Newtonsoft/4.0.230": {
+        "dependencies": {
+          "Abbotware.Core": "4.0.230",
+          "Newtonsoft.Json": "13.0.1",
+          "Newtonsoft.Json.Bson": "1.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Abbotware.Interop.Newtonsoft.dll": {
+            "assemblyVersion": "4.0.230.0",
+            "fileVersion": "4.0.230.0"
+          }
+        }
+      },
+      "Abbotware.Interop.RestSharp/4.0.230": {
+        "dependencies": {
+          "Abbotware.Interop.Newtonsoft": "4.0.230",
+          "RestSharp": "106.12.0",
+          "RestSharp.Serializers.NewtonsoftJson": "106.12.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Abbotware.Interop.RestSharp.dll": {
+            "assemblyVersion": "4.0.230.0",
+            "fileVersion": "4.0.230.0"
+          }
+        }
+      },
+      "Abbotware.Interop.TDAmeritrade/4.0.230": {
+        "dependencies": {
+          "Abbotware.Interop.RestSharp": "4.0.230",
+          "System.ComponentModel.Annotations": "5.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Abbotware.Interop.TDAmeritrade.dll": {
+            "assemblyVersion": "4.0.230.0",
+            "fileVersion": "4.0.230.0"
+          }
         }
       },
       "Alpaca.Markets/5.0.6": {
@@ -103,6 +150,17 @@
           }
         }
       },
+      "Newtonsoft.Json.Bson/1.0.2": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.Bson.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.2.22727"
+          }
+        }
+      },
       "NLog/4.7.10": {
         "runtime": {
           "lib/netstandard2.0/NLog.dll": {
@@ -139,6 +197,26 @@
           "lib/netstandard2.0/Polly.dll": {
             "assemblyVersion": "7.0.0.0",
             "fileVersion": "7.2.2.0"
+          }
+        }
+      },
+      "RestSharp/106.12.0": {
+        "runtime": {
+          "lib/netstandard2.0/RestSharp.dll": {
+            "assemblyVersion": "106.12.0.0",
+            "fileVersion": "106.12.0.0"
+          }
+        }
+      },
+      "RestSharp.Serializers.NewtonsoftJson/106.12.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1",
+          "RestSharp": "106.12.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/RestSharp.Serializers.NewtonsoftJson.dll": {
+            "assemblyVersion": "106.12.0.0",
+            "fileVersion": "106.12.0.0"
           }
         }
       },
@@ -282,6 +360,14 @@
           "System.Runtime": "4.3.0",
           "System.Runtime.Extensions": "4.3.0",
           "System.Threading": "4.3.0"
+        }
+      },
+      "System.ComponentModel.Annotations/5.0.0": {
+        "runtime": {
+          "lib/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.20.51904"
+          }
         }
       },
       "System.Data.SqlClient/4.8.2": {
@@ -727,6 +813,34 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Abbotware.Core/4.0.230": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NHdyKRNXw2KW7R+QL5yoVKN+X55AocPcLeT1vhsLqp1AaqhFiCcFnXx85vT4uv3qinzRNzBEx6ZSBJ0U+sKiaQ==",
+      "path": "abbotware.core/4.0.230",
+      "hashPath": "abbotware.core.4.0.230.nupkg.sha512"
+    },
+    "Abbotware.Interop.Newtonsoft/4.0.230": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-epUdgFunoS88+Ey4u3b4UAPGR4KJW4Vx5dT5llm1f19d+Y6GRl2eeOYsqgZIu3PTEPY/KVFtKyvxNkPOHd6IRA==",
+      "path": "abbotware.interop.newtonsoft/4.0.230",
+      "hashPath": "abbotware.interop.newtonsoft.4.0.230.nupkg.sha512"
+    },
+    "Abbotware.Interop.RestSharp/4.0.230": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Cu1Zd2YizY0PBZOr37PLiS5qY6Rx5LpOewzui9k+IlPcmDovwRkA1iRuWTEblh+M1hxxz4WbqHR38RDseo4A6Q==",
+      "path": "abbotware.interop.restsharp/4.0.230",
+      "hashPath": "abbotware.interop.restsharp.4.0.230.nupkg.sha512"
+    },
+    "Abbotware.Interop.TDAmeritrade/4.0.230": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-d2wDuizFcP2VXGoyPAjYH3mlbaQBhJ95ZqYamviNErqbWBoYqz4caDO0UBL4EsdaAKwULfUvf31Nikz+a1Yu3g==",
+      "path": "abbotware.interop.tdameritrade/4.0.230",
+      "hashPath": "abbotware.interop.tdameritrade.4.0.230.nupkg.sha512"
+    },
     "Alpaca.Markets/5.0.6": {
       "type": "package",
       "serviceable": true,
@@ -839,6 +953,13 @@
       "path": "newtonsoft.json/13.0.1",
       "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
     },
+    "Newtonsoft.Json.Bson/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-QYFyxhaABwmq3p/21VrZNYvCg3DaEoN/wUuw5nmfAf0X3HLjgupwhkEWdgfb9nvGAUIv3osmZoD3kKl4jxEmYQ==",
+      "path": "newtonsoft.json.bson/1.0.2",
+      "hashPath": "newtonsoft.json.bson.1.0.2.nupkg.sha512"
+    },
     "NLog/4.7.10": {
       "type": "package",
       "serviceable": true,
@@ -866,6 +987,20 @@
       "sha512": "sha512-E6CeKyS513j7taKAq4q2MESDBvzuzWnR1rQ2Y2zqJvpiVtKMm699Aubb20MUPBDmb0Ov8PmcLHTCVFdCjoy2kA==",
       "path": "polly/7.2.2",
       "hashPath": "polly.7.2.2.nupkg.sha512"
+    },
+    "RestSharp/106.12.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-irOsQHe5nTJB0BKxGQnTX1dsgCPl5dLTxvL7gbl98JiFPiHMN4wpFyUG/66ZpaFCsIrPKh6XwozWXlwYe9JwYQ==",
+      "path": "restsharp/106.12.0",
+      "hashPath": "restsharp.106.12.0.nupkg.sha512"
+    },
+    "RestSharp.Serializers.NewtonsoftJson/106.12.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bI3VeUGgs5CC9IuCyxtmAIgayrX3w5laV4kYRnYqMrq3enVNE1xSSaDuz9Jzy+upFGhOmNNMo+RsQ4nYRXRgHQ==",
+      "path": "restsharp.serializers.newtonsoftjson/106.12.0",
+      "hashPath": "restsharp.serializers.newtonsoftjson.106.12.0.nupkg.sha512"
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
       "type": "package",
@@ -1041,6 +1176,13 @@
       "sha512": "sha512-Epx8PoVZR0iuOnJJDzp7pWvdfMMOAvpUo95pC4ScH2mJuXkKA2Y4aR3cG9qt2klHgSons1WFh4kcGW7cSXvrxg==",
       "path": "system.collections.specialized/4.3.0",
       "hashPath": "system.collections.specialized.4.3.0.nupkg.sha512"
+    },
+    "System.ComponentModel.Annotations/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dMkqfy2el8A8/I76n2Hi1oBFEbG1SfxD2l5nhwXV3XjlnOmwxJlQbYpJH4W51odnU9sARCSAgv7S3CyAFMkpYg==",
+      "path": "system.componentmodel.annotations/5.0.0",
+      "hashPath": "system.componentmodel.annotations.5.0.0.nupkg.sha512"
     },
     "System.Data.SqlClient/4.8.2": {
       "type": "package",

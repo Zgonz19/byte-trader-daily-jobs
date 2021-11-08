@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Abbotware.Interop.TDAmeritrade" Version="4.0.230" />
     <PackageReference Include="Alpaca.Markets" Version="5.0.6" />
     <PackageReference Include="Dapper" Version="2.0.90" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
@@ -15,7 +16,7 @@
 
   <ItemGroup>
     <None Update="nlog.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

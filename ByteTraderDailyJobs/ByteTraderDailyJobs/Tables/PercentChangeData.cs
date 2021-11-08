@@ -12,5 +12,6 @@ namespace ByteTraderDailyJobs.Tables
         public DateTime PreviousMarketDate { get; set; }
         public decimal PercentChange { get; set; }
         public decimal AbsoluteChange { get; set; }
+        public decimal VolumePercentChange { get; set; }
     }
 }
