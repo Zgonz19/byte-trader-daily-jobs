@@ -9,15 +9,17 @@ namespace ByteTraderDailyJobs.SubProcessBase.DailyDataProcess
     public class PercentChange
     {
         public List<HistoricalDailyCandles> InputList { get; set; }
-        public DateTime ProcessDate { get; set; }
+        //public DateTime ProcessDate { get; set; }
         public List<List<HistoricalDailyCandles>> FilteredInputList { get; set; }
 
         public List<PercentChangeData> CalculatedData = new List<PercentChangeData>();
 
-        public PercentChange(List<HistoricalDailyCandles> dailyList, DateTime processDate)
+        public PercentChange(List<HistoricalDailyCandles> dailyList)
         {
             InputList = dailyList.OrderBy(e => e.DateTime).ToList();
-            ProcessDate = processDate;
+            FilteredInputList = new List<List<HistoricalDailyCandles>>();
+            FilteredInputList.Add(InputList);
+            //ProcessDate = processDate;
         }
 
         public void FilterList()
@@ -54,7 +56,7 @@ namespace ByteTraderDailyJobs.SubProcessBase.DailyDataProcess
                 }
                 if (Filter.Count == 1)
                 {
-                    FilteredInputList[FilteredInputList.Count - 1].Add(Filter[0]);
+                    //FilteredInputList[FilteredInputList.Count - 1].Add(Filter[0]);
                     Filter = new List<HistoricalDailyCandles>();
                 }
                 else if (Filter.Count > 1)
@@ -65,14 +67,15 @@ namespace ByteTraderDailyJobs.SubProcessBase.DailyDataProcess
             }
             catch (Exception exc)
             {
-
+                //getting out of range error
             }
 
 
         }
         public List<PercentChangeData> CalculateChange()
         {
-            FilterList();
+            //FilterList();
+
             ProcessFilteredList();
             return CalculatedData;
         }
@@ -81,10 +84,6 @@ namespace ByteTraderDailyJobs.SubProcessBase.DailyDataProcess
         {
             try
             {
-                if (FilteredInputList.Exists(e => e.Count == 1))
-                {
-                    var xx = 666;
-                }
                 var dataRows = new List<PercentChangeData>();
                 foreach (var points in FilteredInputList)
                 {
@@ -104,9 +103,11 @@ namespace ByteTraderDailyJobs.SubProcessBase.DailyDataProcess
                                 {
                                     var percentChange = new PercentChangeData();
                                     percentChange.MarketDate = price.DateTime;
+                                    //percentChange.MarketDateString = ;
                                     percentChange.PreviousMarketDate = pastPrice.DateTime;
                                     percentChange.AbsoluteChange = price.Close - pastPrice.Close;
                                     percentChange.PercentChange = 100 * ((price.Close - pastPrice.Close) / pastPrice.Close);
+                                    percentChange.VolumePercentChange = 100 * ((price.Volume - pastPrice.Volume) / pastPrice.Volume);
                                     percentChange.SymbolId = price.SymbolId;
                                     dataRows.Add(percentChange);
                                 }

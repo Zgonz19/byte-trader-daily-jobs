@@ -10,5 +10,8 @@ namespace ByteTraderDailyJobs.Tables
         public string Symbol { get; set; }
         public string Description { get; set; }
         public string IsAssetAvailable { get; set; }
+        public string IsAssetDiscontinued { get; set; }
+        public DateTime CaptureDate { get; set; }
+        public DateTime DiscontinuedDate { get; set; }
     }
 }

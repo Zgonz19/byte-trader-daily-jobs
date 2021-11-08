@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 
 namespace ByteTraderDailyJobs
 {
     class Program
     {
+
+
 
         public static double DateTimeToUnixTimestamp(DateTime dateTime)
         {
@@ -21,7 +24,6 @@ namespace ByteTraderDailyJobs
             var dailyTaskApp = new InitializeApp();
             //InitializeApp.MadeupFunction();
             dailyTaskApp.ExecuteProcessList();
-            Console.WriteLine("Hello World!");
             //TestCommit
             //bool isCatAlive = true; // true
 

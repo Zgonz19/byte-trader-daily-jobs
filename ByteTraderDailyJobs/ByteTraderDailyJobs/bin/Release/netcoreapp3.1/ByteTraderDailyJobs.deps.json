@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v3.1": {
       "ByteTraderDailyJobs/1.0.0": {
         "dependencies": {
-          "Abbotware.Interop.TDAmeritrade": "4.0.224",
+          "Abbotware.Interop.TDAmeritrade": "4.0.230",
           "Alpaca.Markets": "5.0.6",
           "Dapper": "2.0.90",
           "NLog.Web.AspNetCore": "4.13.0",
@@ -19,40 +19,49 @@
           "ByteTraderDailyJobs.dll": {}
         }
       },
-      "Abbotware.Core/4.0.224": {
+      "Abbotware.Core/4.0.230": {
         "runtime": {
           "lib/netstandard2.1/Abbotware.Core.dll": {
-            "assemblyVersion": "4.0.224.0",
-            "fileVersion": "4.0.224.0"
+            "assemblyVersion": "4.0.230.0",
+            "fileVersion": "4.0.230.0"
           }
         }
       },
-      "Abbotware.Interop.Newtonsoft/4.0.224": {
+      "Abbotware.Interop.Newtonsoft/4.0.230": {
         "dependencies": {
-          "Abbotware.Core": "4.0.224",
+          "Abbotware.Core": "4.0.230",
           "Newtonsoft.Json": "13.0.1",
           "Newtonsoft.Json.Bson": "1.0.2"
         },
         "runtime": {
           "lib/netstandard2.1/Abbotware.Interop.Newtonsoft.dll": {
-            "assemblyVersion": "4.0.224.0",
-            "fileVersion": "4.0.224.0"
+            "assemblyVersion": "4.0.230.0",
+            "fileVersion": "4.0.230.0"
           }
         }
       },
-      "Abbotware.Interop.TDAmeritrade/4.0.224": {
+      "Abbotware.Interop.RestSharp/4.0.230": {
         "dependencies": {
-          "Abbotware.Core": "4.0.224",
-          "Abbotware.Interop.Newtonsoft": "4.0.224",
-          "Newtonsoft.Json": "13.0.1",
+          "Abbotware.Interop.Newtonsoft": "4.0.230",
           "RestSharp": "106.12.0",
-          "RestSharp.Serializers.NewtonsoftJson": "106.12.0",
+          "RestSharp.Serializers.NewtonsoftJson": "106.12.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Abbotware.Interop.RestSharp.dll": {
+            "assemblyVersion": "4.0.230.0",
+            "fileVersion": "4.0.230.0"
+          }
+        }
+      },
+      "Abbotware.Interop.TDAmeritrade/4.0.230": {
+        "dependencies": {
+          "Abbotware.Interop.RestSharp": "4.0.230",
           "System.ComponentModel.Annotations": "5.0.0"
         },
         "runtime": {
           "lib/netstandard2.1/Abbotware.Interop.TDAmeritrade.dll": {
-            "assemblyVersion": "4.0.224.0",
-            "fileVersion": "4.0.224.0"
+            "assemblyVersion": "4.0.230.0",
+            "fileVersion": "4.0.230.0"
           }
         }
       },
@@ -804,26 +813,33 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Abbotware.Core/4.0.224": {
+    "Abbotware.Core/4.0.230": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-FV0B4XSigyqngzVVUFlAAkIdXjBz42aIeFMuP+caLJtbxOo/ix4AV2ZTfqRWsW/XhC3idP+0bSdr80HqMcTxSg==",
-      "path": "abbotware.core/4.0.224",
-      "hashPath": "abbotware.core.4.0.224.nupkg.sha512"
+      "sha512": "sha512-NHdyKRNXw2KW7R+QL5yoVKN+X55AocPcLeT1vhsLqp1AaqhFiCcFnXx85vT4uv3qinzRNzBEx6ZSBJ0U+sKiaQ==",
+      "path": "abbotware.core/4.0.230",
+      "hashPath": "abbotware.core.4.0.230.nupkg.sha512"
     },
-    "Abbotware.Interop.Newtonsoft/4.0.224": {
+    "Abbotware.Interop.Newtonsoft/4.0.230": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-A0BaydjtwsAzBBrvUt+rvnKjbOI2P+5wUCI+8Fq8Koo2W4CEGKzcAhuZXJmebmxBUzsFwGfDt3oBHtd5I02bwA==",
-      "path": "abbotware.interop.newtonsoft/4.0.224",
-      "hashPath": "abbotware.interop.newtonsoft.4.0.224.nupkg.sha512"
+      "sha512": "sha512-epUdgFunoS88+Ey4u3b4UAPGR4KJW4Vx5dT5llm1f19d+Y6GRl2eeOYsqgZIu3PTEPY/KVFtKyvxNkPOHd6IRA==",
+      "path": "abbotware.interop.newtonsoft/4.0.230",
+      "hashPath": "abbotware.interop.newtonsoft.4.0.230.nupkg.sha512"
     },
-    "Abbotware.Interop.TDAmeritrade/4.0.224": {
+    "Abbotware.Interop.RestSharp/4.0.230": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-zySmhGgaRcuGVFu3ppObuewD0Sy+nEoTZL0vNTJjIc64/wsMzXZE76ZZBXZQsDrSHwfuW/OWB0l/w7nb/mR8lA==",
-      "path": "abbotware.interop.tdameritrade/4.0.224",
-      "hashPath": "abbotware.interop.tdameritrade.4.0.224.nupkg.sha512"
+      "sha512": "sha512-Cu1Zd2YizY0PBZOr37PLiS5qY6Rx5LpOewzui9k+IlPcmDovwRkA1iRuWTEblh+M1hxxz4WbqHR38RDseo4A6Q==",
+      "path": "abbotware.interop.restsharp/4.0.230",
+      "hashPath": "abbotware.interop.restsharp.4.0.230.nupkg.sha512"
+    },
+    "Abbotware.Interop.TDAmeritrade/4.0.230": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-d2wDuizFcP2VXGoyPAjYH3mlbaQBhJ95ZqYamviNErqbWBoYqz4caDO0UBL4EsdaAKwULfUvf31Nikz+a1Yu3g==",
+      "path": "abbotware.interop.tdameritrade/4.0.230",
+      "hashPath": "abbotware.interop.tdameritrade.4.0.230.nupkg.sha512"
     },
     "Alpaca.Markets/5.0.6": {
       "type": "package",
