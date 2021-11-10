@@ -463,7 +463,7 @@ namespace ByteTraderDailyJobs.Connections
             return index;
         }
 
-        public async Task InsertWeeklyVolatility(int SymbolId, string DateString, int CountP, int CountN, decimal HighToLowChange, decimal ChangeOnClose, string ChangeDirection, string OrderedChange, string AbsoluteChange, string UnorderedChange)
+        public async Task InsertWeeklyVolatility(int SymbolId, string DateString, int CountP, int CountN, decimal HighToLowChange, decimal ChangeOnClose, string ChangeDirection, string OrderedChange, string AbsoluteChange, string UnorderedChange, decimal OrderedHighAndLow)
         {
             try
             {
@@ -478,9 +478,10 @@ namespace ByteTraderDailyJobs.Connections
                 parameters.Add("@OrderedChange", OrderedChange);
                 parameters.Add("@AbsoluteChange", AbsoluteChange);
                 parameters.Add("@UnorderedChange", UnorderedChange);
+                parameters.Add("@OrderedHighAndLow", OrderedHighAndLow);
 
-                var sqlCommand = $"INSERT INTO dbo.WeeklyVolatility (SymbolId, DateString, CountP, CountN, HighToLowChange, ChangeOnClose, ChangeDirection, OrderedChange, AbsoluteChange, UnorderedChange)" +
-                    $"VALUES (@SymbolId, @DateString, @CountP, @CountN, @HighToLowChange, @ChangeOnClose, @ChangeDirection, @OrderedChange, @AbsoluteChange, @UnorderedChange);";
+                var sqlCommand = $"INSERT INTO dbo.WeeklyVolatility (SymbolId, DateString, CountP, CountN, HighToLowChange, ChangeOnClose, ChangeDirection, OrderedChange, AbsoluteChange, UnorderedChange, OrderedHighAndLow)" +
+                    $"VALUES (@SymbolId, @DateString, @CountP, @CountN, @HighToLowChange, @ChangeOnClose, @ChangeDirection, @OrderedChange, @AbsoluteChange, @UnorderedChange, @OrderedHighAndLow);";
                 using (IDbConnection cn = Connection)
                 {
                     try

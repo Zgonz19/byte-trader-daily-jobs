@@ -74,6 +74,17 @@ namespace ByteTraderDailyJobs.SubProcessBase
                         var highToLowChange = 100 * ((maxhigh - Minlow) / Minlow);
                         var changeOnClose = 100 * ((maxclose - minclose) / minclose);
 
+                        var filteredCandles = priceDictionary;
+
+                        var maxObj = filteredCandles.OrderByDescending(e => e.Value).First();
+                        var minObj = filteredCandles.OrderBy(e => e.Value).First();
+                        var orderedHighAndLowDict = new List<KeyValuePair<DateTime, decimal>>();
+                        orderedHighAndLowDict.Add(maxObj);
+                        orderedHighAndLowDict.Add(minObj);
+                        orderedHighAndLowDict = orderedHighAndLowDict.OrderBy(e => e.Key).ToList();
+                        var orderedHighAndLow = 100 * ((orderedHighAndLowDict[1].Value - orderedHighAndLowDict[0].Value) / orderedHighAndLowDict[0].Value);
+
+
                         var orderedDict = priceDictionary.OrderBy(e => e.Key).ToList();
                         var ChangeDirection = new List<string>();
                         var OrderedChange = new List<decimal>();
@@ -142,7 +153,7 @@ namespace ByteTraderDailyJobs.SubProcessBase
                         var absolutechange = String.Join("|", Absolutechange.ToArray());
                         var unorderedChange = String.Join("|", UnorderedChange.ToArray());
 
-                        await Repo.InsertWeeklyVolatility(stock.SymbolId, Repo.GenerateDateString(endDate), countP, countN, highToLowChange, changeOnClose, changeDirection, orderedChange, absolutechange, unorderedChange);
+                        await Repo.InsertWeeklyVolatility(stock.SymbolId, Repo.GenerateDateString(endDate), countP, countN, highToLowChange, changeOnClose, changeDirection, orderedChange, absolutechange, unorderedChange, orderedHighAndLow);
                     }
                 }
                 catch (Exception exc)
@@ -273,6 +284,9 @@ namespace ByteTraderDailyJobs.SubProcessBase
             table.Columns.Add("Symbol", typeof(string));
             table.Columns.Add("CountP", typeof(decimal));
             table.Columns.Add("CountN", typeof(decimal));
+            table.Columns.Add("DailyVolumeChange", typeof(decimal));           
+            table.Columns.Add("DailyPercentChange", typeof(decimal));
+            table.Columns.Add("OrderedHighAndLow", typeof(decimal));
             table.Columns.Add("HighToLowChange", typeof(decimal));
             table.Columns.Add("ChangeOnClose", typeof(decimal));
             table.Columns.Add("ChangeDirection", typeof(string));
@@ -344,6 +358,7 @@ namespace ByteTraderDailyJobs.SubProcessBase
                 var changeSeries = changeData.Select(e => e.PercentChange).ToArray();
                 var changeSeriesSum = changeData.Sum(e => e.PercentChange);
                 var VolumeChangeSeries = changeData.Select(e => e.VolumePercentChange).ToArray();
+                var DailyPercentChange = changeData.OrderByDescending(e => e.MarketDate).First();
                 var volatility = await Repo.QueryWeeklyVolatility(asset.SymbolId, dateString);
                 if (volatility == null)
                 {
@@ -370,6 +385,9 @@ namespace ByteTraderDailyJobs.SubProcessBase
                     asset.Symbol,
                     volatility.CountP,
                     volatility.CountN,
+                    DailyPercentChange.VolumePercentChange,
+                    DailyPercentChange.PercentChange,
+                    volatility.OrderedHighAndLow,
                     volatility.HighToLowChange,
                     volatility.ChangeOnClose,
                     volatility.ChangeDirection,

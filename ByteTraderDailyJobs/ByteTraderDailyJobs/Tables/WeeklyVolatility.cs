@@ -16,5 +16,6 @@ namespace ByteTraderDailyJobs.Tables
         public string OrderedChange { get; set; }
         public string AbsoluteChange { get; set; }
         public string UnorderedChange { get; set; }
+        public decimal OrderedHighAndLow { get; set; }
     }
 }

@@ -271,7 +271,7 @@ namespace ByteTraderDailyJobs.SubProcessBase
         public async Task AmeritradeFundamentalData()
         {
             Logger.Info("Starting TDA Fundamental Data Ingestion...");
-            DateTime captureDate = DateTime.Now.AddDays(-1).Date;
+            DateTime captureDate = DateTime.Now.Date;
             var stockList = await Repo.QueryAvailableSymbols();
             var apiKey = await Repo.GetSystemDefault("TDA Api Key");
             var accessToken = await Repo.GetSystemDefault("TDA Access Token");

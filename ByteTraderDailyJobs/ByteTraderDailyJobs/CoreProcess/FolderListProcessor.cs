@@ -12,8 +12,8 @@ namespace ByteTraderDailyJobs.CoreProcess
         string BaseFolderPath = "";
         public FolderListProcessor()
         {
-            //BaseFolderPath = @"C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\DailyProcessList";
-            BaseFolderPath = @"E:\ByteTraderProduction\DailyProcessList";
+            BaseFolderPath = @"C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\DailyProcessList";
+            //BaseFolderPath = @"E:\ByteTraderProduction\DailyProcessList";
         }
 
 

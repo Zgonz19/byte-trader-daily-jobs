@@ -107,7 +107,7 @@ namespace ByteTraderDailyJobs.SubProcessBase.DailyDataProcess
                                     percentChange.PreviousMarketDate = pastPrice.DateTime;
                                     percentChange.AbsoluteChange = price.Close - pastPrice.Close;
                                     percentChange.PercentChange = 100 * ((price.Close - pastPrice.Close) / pastPrice.Close);
-                                    percentChange.VolumePercentChange = 100 * ((price.Volume - pastPrice.Volume) / pastPrice.Volume);
+                                    percentChange.VolumePercentChange = 100 * ((Convert.ToDecimal(price.Volume) - Convert.ToDecimal(pastPrice.Volume)) / Convert.ToDecimal(pastPrice.Volume));
                                     percentChange.SymbolId = price.SymbolId;
                                     dataRows.Add(percentChange);
                                 }
