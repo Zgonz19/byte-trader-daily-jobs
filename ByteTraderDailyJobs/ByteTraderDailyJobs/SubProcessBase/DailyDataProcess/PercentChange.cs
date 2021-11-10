@@ -107,7 +107,22 @@ namespace ByteTraderDailyJobs.SubProcessBase.DailyDataProcess
                                     percentChange.PreviousMarketDate = pastPrice.DateTime;
                                     percentChange.AbsoluteChange = price.Close - pastPrice.Close;
                                     percentChange.PercentChange = 100 * ((price.Close - pastPrice.Close) / pastPrice.Close);
-                                    percentChange.VolumePercentChange = 100 * ((Convert.ToDecimal(price.Volume) - Convert.ToDecimal(pastPrice.Volume)) / Convert.ToDecimal(pastPrice.Volume));
+                                    if(pastPrice.Volume != 0 && price.Volume != 0)
+                                    {
+                                        percentChange.VolumePercentChange = 100 * ((Convert.ToDecimal(price.Volume) - Convert.ToDecimal(pastPrice.Volume)) / Convert.ToDecimal(pastPrice.Volume));
+                                    }
+                                    else if(pastPrice.Volume != 0 && price.Volume == 0)
+                                    {
+                                        percentChange.VolumePercentChange = 100 * ((Convert.ToDecimal(1) - Convert.ToDecimal(pastPrice.Volume)) / Convert.ToDecimal(pastPrice.Volume));
+                                    }
+                                    else if(pastPrice.Volume == 0 && price.Volume != 0)
+                                    {
+                                        percentChange.VolumePercentChange = 100 * ((Convert.ToDecimal(price.Volume) - Convert.ToDecimal(1)) / Convert.ToDecimal(1));
+                                    }
+                                    else if (pastPrice.Volume == 0 && price.Volume == 0)
+                                    {
+                                        percentChange.VolumePercentChange = 100 * ((Convert.ToDecimal(1) - Convert.ToDecimal(1)) / Convert.ToDecimal(1));
+                                    }
                                     percentChange.SymbolId = price.SymbolId;
                                     dataRows.Add(percentChange);
                                 }
