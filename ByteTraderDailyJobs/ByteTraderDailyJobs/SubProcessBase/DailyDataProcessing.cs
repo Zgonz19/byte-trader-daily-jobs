@@ -261,18 +261,27 @@ namespace ByteTraderDailyJobs.SubProcessBase
         }
         public async Task DistributeDailyReport()
         {
-            var reportDate = DateTime.Now.Date;
-            var stockList = await Repo.QueryAvailableSymbols();
-            var dailyReport = await GenerateDailyReport(stockList, reportDate);
-            var reportPath = @"C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\DailyReport\" + $"ByteTrader_DailyReport_{Repo.GenerateDateString(reportDate)}.csv";
-            WriteToCsvFile(dailyReport, reportPath);
-            var subscribedUsers = await Repo.GetAppUsers();
-            var emails = subscribedUsers.Select(e => e.Email).ToList();
-            foreach(var email in emails)
+            try
             {
-                await EmailEngine.SendEmailAttachment(email, "", $"ByteTrader Report {reportDate.ToString("yyyy-MM-dd")}", reportPath);
+                Logger.Info("Generating Daily Report...");
+                var reportDate = DateTime.Now.Date;
+                var stockList = await Repo.QueryAvailableSymbols();
+                var dailyReport = await GenerateDailyReport(stockList, reportDate);
+                var reportPath = @"C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\DailyReport\" + $"ByteTrader_DailyReport_{Repo.GenerateDateString(reportDate)}.csv";
+                WriteToCsvFile(dailyReport, reportPath);
+                var subscribedUsers = await Repo.GetAppUsers();
+                var emails = subscribedUsers.Select(e => e.Email).ToList();
+                foreach (var email in emails)
+                {
+                    await EmailEngine.SendEmailAttachment(email, "", $"ByteTrader Report {reportDate.ToString("yyyy-MM-dd")}", reportPath);
+                }
+                Logger.Info("Daily Report Distribution Complete...");
             }
-           
+            catch(Exception exc)
+            {
+                Logger.Info(exc.ToString());
+            }
+
         }
 
         public async Task<DataTable> GenerateDailyReport(List<SymbolIndex> symbols, DateTime reportDate)
@@ -358,7 +367,15 @@ namespace ByteTraderDailyJobs.SubProcessBase
                 var changeSeries = changeData.Select(e => e.PercentChange).ToArray();
                 var changeSeriesSum = changeData.Sum(e => e.PercentChange);
                 var VolumeChangeSeries = changeData.Select(e => e.VolumePercentChange).ToArray();
-                var DailyPercentChange = changeData.OrderByDescending(e => e.MarketDate).First();
+                var dailyChangeObj = changeData.OrderByDescending(e => e.MarketDate).FirstOrDefault();
+                decimal PercentChange = 0;
+                decimal VolumePercentChange = 0;
+                if (dailyChangeObj != null)
+                {
+                    PercentChange = dailyChangeObj.PercentChange;
+                    VolumePercentChange = dailyChangeObj.VolumePercentChange;
+
+                }
                 var volatility = await Repo.QueryWeeklyVolatility(asset.SymbolId, dateString);
                 if (volatility == null)
                 {
@@ -385,8 +402,8 @@ namespace ByteTraderDailyJobs.SubProcessBase
                     asset.Symbol,
                     volatility.CountP,
                     volatility.CountN,
-                    DailyPercentChange.VolumePercentChange,
-                    DailyPercentChange.PercentChange,
+                    VolumePercentChange,
+                    PercentChange,
                     volatility.OrderedHighAndLow,
                     volatility.HighToLowChange,
                     volatility.ChangeOnClose,

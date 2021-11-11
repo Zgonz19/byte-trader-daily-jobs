@@ -3447,3 +3447,275 @@
 2021-11-10 16:58:01.8805 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
 2021-11-10 17:00:42.5911 Info AppDomain Shutting down. Logger closing...
 2021-11-10 17:00:42.6062 Info Logger has been shut down.
+2021-11-10 21:35:19.9109 Info Message Template Auto Format enabled
+2021-11-10 21:35:19.9196 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:35:19.9618 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:35:19.9618 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:35:19.9618 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:35:20.0046 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:35:20.0419 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:35:20.0419 Info Message Template Auto Format enabled
+2021-11-10 21:35:20.0419 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:35:20.0419 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:35:20.0419 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:35:20.0419 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:35:20.0526 Info Closing old configuration.
+2021-11-10 21:35:20.0856 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:35:20.0856 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:35:20.0856 Info Message Template Auto Format enabled
+2021-11-10 21:35:20.0856 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:35:20.0856 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:35:20.0856 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:35:20.0856 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:35:20.0856 Info Closing old configuration.
+2021-11-10 21:35:20.0856 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:35:20.1232 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:35:20.1232 Info Message Template Auto Format enabled
+2021-11-10 21:35:20.1232 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:35:20.1232 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:35:20.1232 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:35:20.1232 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:35:20.1232 Info Closing old configuration.
+2021-11-10 21:35:20.1232 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:35:20.1305 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:35:20.1305 Info Message Template Auto Format enabled
+2021-11-10 21:35:20.1305 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:35:20.1305 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:35:20.1305 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:35:20.1305 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:35:20.1305 Info Closing old configuration.
+2021-11-10 21:35:20.1305 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:35:20.1305 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:35:20.1305 Info Message Template Auto Format enabled
+2021-11-10 21:35:20.1305 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:35:20.1305 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:35:20.1305 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:35:20.1305 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:35:20.1466 Info Closing old configuration.
+2021-11-10 21:35:20.1466 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:35:20.1466 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:35:20.1466 Info Message Template Auto Format enabled
+2021-11-10 21:35:20.1466 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:35:20.1466 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:35:20.1466 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:35:20.1466 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:35:20.1466 Info Closing old configuration.
+2021-11-10 21:35:20.1466 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:37:58.8260 Info Message Template Auto Format enabled
+2021-11-10 21:37:58.8363 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:37:58.8845 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:37:58.8845 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:37:58.8845 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:37:58.9245 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:37:58.9593 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:37:58.9593 Info Message Template Auto Format enabled
+2021-11-10 21:37:58.9593 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:37:58.9593 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:37:58.9593 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:37:58.9593 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:37:58.9593 Info Closing old configuration.
+2021-11-10 21:37:58.9908 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:37:58.9908 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:37:58.9908 Info Message Template Auto Format enabled
+2021-11-10 21:37:58.9908 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:37:58.9908 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:37:58.9908 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:37:58.9908 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:37:58.9908 Info Closing old configuration.
+2021-11-10 21:37:58.9908 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:37:59.0252 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:37:59.0252 Info Message Template Auto Format enabled
+2021-11-10 21:37:59.0252 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:37:59.0252 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:37:59.0252 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:37:59.0252 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:37:59.0252 Info Closing old configuration.
+2021-11-10 21:37:59.0252 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:37:59.0252 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:37:59.0252 Info Message Template Auto Format enabled
+2021-11-10 21:37:59.0252 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:37:59.0252 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:37:59.0252 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:37:59.0252 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:37:59.0252 Info Closing old configuration.
+2021-11-10 21:37:59.0252 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:37:59.0377 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:37:59.0377 Info Message Template Auto Format enabled
+2021-11-10 21:37:59.0377 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:37:59.0377 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:37:59.0377 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:37:59.0377 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:37:59.0377 Info Closing old configuration.
+2021-11-10 21:37:59.0377 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:37:59.0377 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:37:59.0377 Info Message Template Auto Format enabled
+2021-11-10 21:37:59.0377 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:37:59.0377 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:37:59.0377 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:37:59.0377 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:37:59.0377 Info Closing old configuration.
+2021-11-10 21:37:59.0377 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:44:40.6853 Info Message Template Auto Format enabled
+2021-11-10 21:44:40.6940 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:44:40.7383 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:44:40.7412 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:44:40.7412 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:44:40.7867 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:44:40.8291 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:44:40.8291 Info Message Template Auto Format enabled
+2021-11-10 21:44:40.8291 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:44:40.8291 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:44:40.8291 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:44:40.8291 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:44:40.8291 Info Closing old configuration.
+2021-11-10 21:44:40.8650 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:44:40.8650 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:44:40.8650 Info Message Template Auto Format enabled
+2021-11-10 21:44:40.8650 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:44:40.8650 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:44:40.8650 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:44:40.8650 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:44:40.8650 Info Closing old configuration.
+2021-11-10 21:44:40.8650 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:44:40.8968 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:44:40.8968 Info Message Template Auto Format enabled
+2021-11-10 21:44:40.8968 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:44:40.8968 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:44:40.8968 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:44:40.8968 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:44:40.8968 Info Closing old configuration.
+2021-11-10 21:44:40.8968 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:44:40.8968 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:44:40.8968 Info Message Template Auto Format enabled
+2021-11-10 21:44:40.8968 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:44:40.8968 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:44:40.8968 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:44:40.8968 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:44:40.8968 Info Closing old configuration.
+2021-11-10 21:44:40.8968 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:44:40.9117 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:44:40.9117 Info Message Template Auto Format enabled
+2021-11-10 21:44:40.9117 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:44:40.9117 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:44:40.9117 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:44:40.9117 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:44:40.9117 Info Closing old configuration.
+2021-11-10 21:44:40.9117 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:44:40.9117 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:44:40.9117 Info Message Template Auto Format enabled
+2021-11-10 21:44:40.9117 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:44:40.9117 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:44:40.9117 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:44:40.9117 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:44:40.9117 Info Closing old configuration.
+2021-11-10 21:44:40.9117 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:45:24.8305 Info Message Template Auto Format enabled
+2021-11-10 21:45:24.8419 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:45:24.8927 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:45:24.8927 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:45:24.9015 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:45:24.9284 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:45:24.9599 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:45:24.9599 Info Message Template Auto Format enabled
+2021-11-10 21:45:24.9599 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:45:24.9599 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:45:24.9599 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:45:24.9599 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:45:24.9599 Info Closing old configuration.
+2021-11-10 21:45:24.9868 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:45:24.9868 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:45:24.9868 Info Message Template Auto Format enabled
+2021-11-10 21:45:24.9868 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:45:24.9906 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:45:24.9906 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:45:24.9906 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:45:24.9906 Info Closing old configuration.
+2021-11-10 21:45:24.9906 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:45:25.0193 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:45:25.0193 Info Message Template Auto Format enabled
+2021-11-10 21:45:25.0193 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:45:25.0217 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:45:25.0217 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:45:25.0217 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:45:25.0217 Info Closing old configuration.
+2021-11-10 21:45:25.0217 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:45:25.0217 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:45:25.0217 Info Message Template Auto Format enabled
+2021-11-10 21:45:25.0217 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:45:25.0217 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:45:25.0217 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:45:25.0217 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:45:25.0217 Info Closing old configuration.
+2021-11-10 21:45:25.0217 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:45:25.0217 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:45:25.0217 Info Message Template Auto Format enabled
+2021-11-10 21:45:25.0217 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:45:25.0217 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:45:25.0217 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:45:25.0217 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:45:25.0217 Info Closing old configuration.
+2021-11-10 21:45:25.0369 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:45:25.0369 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:45:25.0369 Info Message Template Auto Format enabled
+2021-11-10 21:45:25.0369 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:45:25.0369 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:45:25.0369 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:45:25.0369 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:45:25.0369 Info Closing old configuration.
+2021-11-10 21:45:25.0369 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:53:23.4084 Info Message Template Auto Format enabled
+2021-11-10 21:53:23.4169 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:53:23.4612 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:53:23.4612 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:53:23.4612 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:53:23.4990 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:53:23.5344 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:53:23.5395 Info Message Template Auto Format enabled
+2021-11-10 21:53:23.5395 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:53:23.5395 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:53:23.5395 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:53:23.5395 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:53:23.5395 Info Closing old configuration.
+2021-11-10 21:53:23.5701 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:53:23.5701 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:53:23.5701 Info Message Template Auto Format enabled
+2021-11-10 21:53:23.5701 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:53:23.5701 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:53:23.5701 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:53:23.5701 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:53:23.5701 Info Closing old configuration.
+2021-11-10 21:53:23.5701 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:53:23.5988 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:53:23.5993 Info Message Template Auto Format enabled
+2021-11-10 21:53:23.5993 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:53:23.5993 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:53:23.5993 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:53:23.5993 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:53:23.5993 Info Closing old configuration.
+2021-11-10 21:53:23.5993 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:53:23.5993 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:53:23.5993 Info Message Template Auto Format enabled
+2021-11-10 21:53:23.5993 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:53:23.5993 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:53:23.5993 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:53:23.5993 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:53:23.5993 Info Closing old configuration.
+2021-11-10 21:53:23.5993 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:53:23.5993 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:53:23.5993 Info Message Template Auto Format enabled
+2021-11-10 21:53:23.5993 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:53:23.5993 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:53:23.5993 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:53:23.5993 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:53:23.6154 Info Closing old configuration.
+2021-11-10 21:53:23.6154 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 21:53:23.6154 Info Configuring from an XML element in C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config...
+2021-11-10 21:53:23.6154 Info Message Template Auto Format enabled
+2021-11-10 21:53:23.6154 Info Loading assembly: NLog.Web.AspNetCore
+2021-11-10 21:53:23.6154 Info Adding target FileTarget(Name=alldata)
+2021-11-10 21:53:23.6154 Info Adding target ConsoleTarget(Name=console)
+2021-11-10 21:53:23.6154 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'otherFile-web' not found for logging rule: *.
+2021-11-10 21:53:23.6154 Info Closing old configuration.
+2021-11-10 21:53:23.6154 Info Validating config: TargetNames=alldata, console, ConfigItems=32, FilePath=C:\Users\Gonzalo\Dropbox\Github_08_2021\byte-trader-daily-jobs\ByteTraderDevelopment\ByteTraderDailyJobs\ByteTraderDailyJobs\bin\Debug\netcoreapp3.1\nlog.config
+2021-11-10 22:02:49.9826 Info AppDomain Shutting down. Logger closing...
+2021-11-10 22:02:49.9999 Info Logger has been shut down.
